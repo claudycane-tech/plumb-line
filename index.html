@@ -370,7 +370,7 @@
       <button class="drawer-item" onclick="navigateTo('games');closeDrawer()"><div class="drawer-item-icon">🎮</div><span class="drawer-item-label">Games Lobby</span></button>
       <button class="drawer-item" onclick="navigateTo('leaderboard');closeDrawer()"><div class="drawer-item-icon">🏆</div><span class="drawer-item-label">Leaderboard</span></button>
       <div class="drawer-divider"></div>
-      <button class="drawer-item" onclick="showToast('Admin panel coming soon');closeDrawer()"><div class="drawer-item-icon">🔑</div><span class="drawer-item-label">Admin Panel</span></button>
+      <button class="drawer-item" id="admin-drawer-btn" style="display:none" onclick="openAdminPanel();closeDrawer()"><div class="drawer-item-icon">🔑</div><span class="drawer-item-label">Admin Panel</span></button>
       <div class="drawer-divider"></div>
       <button class="drawer-item" onclick="signOut();closeDrawer()"><div class="drawer-item-icon">🚪</div><span class="drawer-item-label" style="color:#E57373">Sign Out</span></button>
     </div>
