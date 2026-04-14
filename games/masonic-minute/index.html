@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="A Masonic Minute"/>
+  <title>A Masonic Minute</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    #app {
+      width: 100%;
+      height: 100vh;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    #title {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #b0a898;
+      margin-bottom: 32px;
+      font-weight: 500;
+      z-index: 10;
+      position: relative;
+    }
+
+    #circle-wrap {
+      position: relative;
+      z-index: 10;
+      width: 240px;
+      height: 240px;
+      flex-shrink: 0;
+    }
+
+    #ring-svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    #image-circle {
+      position: absolute;
+      top: 14px; left: 14px;
+      width: calc(100% - 28px);
+      height: calc(100% - 28px);
+      border-radius: 50%;
+      overflow: hidden;
+      background: #f7f5f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #focus-img {
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
+    }
+
+    #breath-text {
+      z-index: 10;
+      position: relative;
+      margin-top: 32px;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      color: #998f82;
+      font-weight: 400;
+      height: 22px;
+      text-transform: lowercase;
+      transition: opacity 0.9s ease;
+    }
+
+    #timer-bar-wrap {
+      z-index: 10;
+      position: relative;
+      margin-top: 20px;
+      width: 180px;
+      height: 1px;
+      background: #e8e4de;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    #timer-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: 2px;
+    }
+
+    #streak-wrap {
+      z-index: 10;
+      position: relative;
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: #c8c0b4;
+      text-transform: uppercase;
+    }
+
+    #streak-num {
+      font-weight: 600;
+      color: #c8993a;
+    }
+
+    #start-btn {
+      z-index: 10;
+      position: relative;
+      margin-top: 28px;
+      padding: 11px 38px;
+      border: 1px solid #ddd8d0;
+      border-radius: 999px;
+      background: transparent;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: #a09080;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #start-btn:active {
+      border-color: #b0a090;
+      color: #605040;
+      transform: scale(0.97);
+    }
+
+    #complete-msg {
+      z-index: 10;
+      position: relative;
+      margin-top: 16px;
+      font-size: 12px;
+      color: #c8993a;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    /* FOG */
+    #fog-canvas {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      z-index: 6;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div id="title">A Masonic Minute</div>
+
+  <div id="circle-wrap">
+    <svg id="ring-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <circle id="glow-ring"  cx="120" cy="120" r="112" fill="none" stroke-width="10" filter="url(#glow)" opacity="0.5"/>
+      <circle id="solid-ring" cx="120" cy="120" r="112" fill="none" stroke-width="3.5"/>
+    </svg>
+    <div id="image-circle">
+      <img id="focus-img" src="" alt="Masonic symbol"/>
+    </div>
+  </div>
+
+  <div id="breath-text">be still</div>
+
+  <div id="timer-bar-wrap">
+    <div id="timer-bar"></div>
+  </div>
+
+  <div id="streak-wrap">
+    Streak &nbsp;<span id="streak-num">0</span>&nbsp; days
+  </div>
+
+  <button id="start-btn">Begin</button>
+  <div id="complete-msg">Minute complete &nbsp;✦</div>
+
+  <canvas id="fog-canvas"></canvas>
+</div>
+
+<script>
+(function () {
+
+  /* ── Images ── */
+  const images = [
+    'https://freemasonry.bcy.ca/images_download/beehive.gif',
+    'https://freemasonry.bcy.ca/images_download/broken_column.gif',
+    'https://freemasonry.bcy.ca/images_download/s%26c_sun_moon_book.png',
+    'https://freemasonry.bcy.ca/images_download/skull_book.png',
+    'https://freemasonry.bcy.ca/images_download/lamp.gif',
+    'https://freemasonry.bcy.ca/images_download/hands_clasped.gif',
+    'https://freemasonry.bcy.ca/images_download/hourglass_scythe.gif',
+    'https://freemasonry.bcy.ca/images_download/lampoflearning.gif',
+    'https://freemasonry.bcy.ca/images_download/s_c1941.gif'
+  ];
+
+  /* ── Sun color ramp ── */
+  const sunColors = [
+    { r: 45,  g: 35,  b: 90  },
+    { r: 90,  g: 55,  b: 120 },
+    { r: 180, g: 90,  b: 100 },
+    { r: 220, g: 130, b: 70  },
+    { r: 240, g: 185, b: 60  },
+    { r: 235, g: 160, b: 50  },
+    { r: 220, g: 110, b: 40  },
+    { r: 190, g: 70,  b: 50  },
+    { r: 140, g: 55,  b: 90  },
+    { r: 80,  g: 45,  b: 100 },
+    { r: 45,  g: 35,  b: 90  }
+  ];
+
+  /* ── Breath phases (4-7-8 pattern) ── */
+  const breathPhases = [
+    { text: 'inhale...',  ms: 4000 },
+    { text: 'hold...',    ms: 7000 },
+    { text: 'exhale...', ms: 8000 },
+    { text: 'rest...',   ms: 1000 }
+  ];
+
+  const MINUTE = 60000;
+  let running = false, startTime = null, breathIndex = 0, breathTimeout = null;
+
+  const solidRing   = document.getElementById('solid-ring');
+  const glowRing    = document.getElementById('glow-ring');
+  const timerBar    = document.getElementById('timer-bar');
+  const breathText  = document.getElementById('breath-text');
+  const startBtn    = document.getElementById('start-btn');
+  const completeMsg = document.getElementById('complete-msg');
+  const streakNum   = document.getElementById('streak-num');
+  const focusImg    = document.getElementById('focus-img');
+
+  /* ── Helpers ── */
+  function lerp(a, b, t) {
+    return { r: Math.round(a.r+(b.r-a.r)*t), g: Math.round(a.g+(b.g-a.g)*t), b: Math.round(a.b+(b.b-a.b)*t) };
+  }
+  function rgb(c) { return `rgb(${c.r},${c.g},${c.b})`; }
+  function colorAt(t) {
+    const n = sunColors.length - 1;
+    const s = t * n;
+    const i = Math.min(Math.floor(s), n - 1);
+    return lerp(sunColors[i], sunColors[i+1], s - i);
+  }
+  function pickImage() {
+    focusImg.src = images[Math.floor(Math.random() * images.length)];
+  }
+
+  /* ── Ring animation ── */
+  function animateRing(ts) {
+    if (!startTime) startTime = ts;
+    const p = Math.min((ts - startTime) / MINUTE, 1);
+    const c = colorAt(p);
+    const s = rgb(c);
+    solidRing.setAttribute('stroke', s);
+    glowRing.setAttribute('stroke', s);
+    timerBar.style.width = (p * 100) + '%';
+    timerBar.style.background = s;
+    if (p < 1) requestAnimationFrame(animateRing);
+    else onComplete();
+  }
+
+  /* ── Breath cycling ── */
+  function scheduleBreath() {
+    const phase = breathPhases[breathIndex];
+    breathText.style.opacity = '0';
+    setTimeout(() => { breathText.textContent = phase.text; breathText.style.opacity = '1'; }, 450);
+    breathTimeout = setTimeout(() => {
+      if (!running) return;
+      breathIndex = (breathIndex + 1) % breathPhases.length;
+      scheduleBreath();
+    }, phase.ms);
+  }
+
+  /* ── Session complete ── */
+  function onComplete() {
+    running = false;
+    clearTimeout(breathTimeout);
+    breathText.style.opacity = '0';
+    setTimeout(() => { breathText.textContent = 'well done'; breathText.style.opacity = '1'; }, 450);
+    completeMsg.style.opacity = '1';
+    startBtn.textContent = 'Begin Again';
+    startBtn.style.display = 'block';
+    updateStreak();
+  }
+
+  /* ── Streak ── */
+  function updateStreak() {
+    const today = new Date().toDateString();
+    const last  = localStorage.getItem('mm_last');
+    const yest  = new Date(Date.now() - 86400000).toDateString();
+    let streak  = parseInt(localStorage.getItem('mm_streak') || '0');
+    if (last === yest) streak++;
+    else if (last !== today) streak = 1;
+    localStorage.setItem('mm_last', today);
+    localStorage.setItem('mm_streak', streak);
+    streakNum.textContent = streak;
+  }
+  function loadStreak() {
+    streakNum.textContent = localStorage.getItem('mm_streak') || '0';
+  }
+
+  /* ── Start ── */
+  function startSession() {
+    running = true;
+    startTime = null;
+    breathIndex = 0;
+    completeMsg.style.opacity = '0';
+    startBtn.style.display = 'none';
+    breathText.textContent = 'be still';
+    breathText.style.opacity = '1';
+    timerBar.style.width = '0%';
+    const c0 = rgb(sunColors[0]);
+    solidRing.setAttribute('stroke', c0);
+    glowRing.setAttribute('stroke', c0);
+    pickImage();
+    setTimeout(() => { scheduleBreath(); requestAnimationFrame(animateRing); }, 900);
+  }
+
+  startBtn.addEventListener('click', startSession);
+  pickImage();
+  loadStreak();
+
+  /* ════════════════════════════════════════
+     FOG ENGINE
+     Large slow-drifting radial blobs that
+     stack up to create a ground-fog look.
+     Much more visible than before.
+  ════════════════════════════════════════ */
+  const canvas = document.getElementById('fog-canvas');
+  const ctx    = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = 200;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); seedParticles(); });
+
+  let particles = [];
+
+  function seedParticles() {
+    const w = canvas.width;
+    const h = canvas.height;
+    particles = [];
+    /* Layer 1 – big slow base blobs */
+    for (let i = 0; i < 12; i++) {
+      particles.push({
+        x:     Math.random() * w * 1.4 - w * 0.2,
+        y:     h * 0.55 + Math.random() * h * 0.5,
+        r:     90 + Math.random() * 120,
+        speed: 0.06 + Math.random() * 0.1,
+        alpha: 0.13 + Math.random() * 0.10,
+        phase: Math.random() * Math.PI * 2,
+        drift: 0.8 + Math.random() * 2.0
+      });
+    }
+    /* Layer 2 – medium wisps */
+    for (let i = 0; i < 14; i++) {
+      particles.push({
+        x:     Math.random() * w * 1.4 - w * 0.2,
+        y:     h * 0.3 + Math.random() * h * 0.7,
+        r:     50 + Math.random() * 80,
+        speed: 0.1 + Math.random() * 0.18,
+        alpha: 0.07 + Math.random() * 0.08,
+        phase: Math.random() * Math.PI * 2,
+        drift: 1.5 + Math.random() * 3.0
+      });
+    }
+    /* Layer 3 – small surface wisps */
+    for (let i = 0; i < 10; i++) {
+      particles.push({
+        x:     Math.random() * w * 1.4 - w * 0.2,
+        y:     h * 0.7 + Math.random() * h * 0.35,
+        r:     25 + Math.random() * 45,
+        speed: 0.15 + Math.random() * 0.25,
+        alpha: 0.05 + Math.random() * 0.07,
+        phase: Math.random() * Math.PI * 2,
+        drift: 2 + Math.random() * 4
+      });
+    }
+  }
+  seedParticles();
+
+  function drawFog(ts) {
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    particles.forEach(p => {
+      p.x += p.speed;
+      if (p.x - p.r > w + 60) p.x = -p.r - 60;
+      const dy = Math.sin(ts * 0.00025 + p.phase) * p.drift;
+      const gy = p.y + dy;
+
+      /* Each blob: tall ellipse to hug the ground */
+      const grd = ctx.createRadialGradient(p.x, gy, 0, p.x, gy, p.r);
+      grd.addColorStop(0,   `rgba(200,198,194,${p.alpha})`);
+      grd.addColorStop(0.5, `rgba(210,208,204,${p.alpha * 0.55})`);
+      grd.addColorStop(1,   'rgba(210,208,204,0)');
+
+      ctx.save();
+      ctx.scale(1, 0.45);        /* flatten blob vertically → fog sheet */
+      ctx.beginPath();
+      ctx.arc(p.x, gy / 0.45, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+      ctx.restore();
+    });
+
+    requestAnimationFrame(drawFog);
+  }
+  requestAnimationFrame(drawFog);
+
+})();
+</script>
+</body>
+</html>
