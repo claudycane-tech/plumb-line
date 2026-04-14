@@ -26,395 +26,244 @@
       --nav-height: 64px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-    html, body {
-      width: 100%; height: 100%;
-      overflow: hidden;
-      background: var(--off-white);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Georgia, sans-serif;
-      color: var(--text-primary);
-    }
-
-    #app { width: 100%; height: 100vh; display: flex; flex-direction: column; position: relative; overflow: hidden; }
-
-    /* ── AUTH SCREEN ── */
-    #auth-screen {
-      position: fixed; inset: 0;
-      background: var(--black);
-      z-index: 1000;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 32px 24px;
-    }
-
-    #auth-screen.hidden { display: none; }
-
-    .auth-logo {
-      text-align: center; margin-bottom: 40px;
-    }
-
-    .auth-logo .the {
-      font-size: 11px; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--gold);
-      display: block; margin-bottom: 4px;
-    }
-
-    .auth-logo .name {
-      font-size: 32px; font-weight: 600;
-      color: var(--white); font-family: Georgia, serif;
-      letter-spacing: 0.05em;
-    }
-
-    .auth-logo .symbol {
-      display: block; font-size: 28px;
-      color: var(--gold); margin-top: 8px;
-    }
-
-    .auth-logo .tagline {
-      font-size: 11px; color: var(--text-muted);
-      letter-spacing: 0.15em; text-transform: uppercase;
-      margin-top: 10px;
-    }
-
-    .auth-card {
-      width: 100%; max-width: 360px;
-      background: var(--off-black);
-      border-radius: 16px;
-      border: 1px solid rgba(201,168,76,0.25);
-      padding: 28px 24px;
-    }
-
-    .auth-tabs {
-      display: flex; margin-bottom: 24px;
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-    }
-
-    .auth-tab {
-      flex: 1; padding: 10px 8px;
-      text-align: center;
-      font-size: 12px; letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      cursor: pointer;
-      border: none; background: transparent;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -1px;
-      transition: all 0.2s;
-    }
-
-    .auth-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
-
-    .auth-field { margin-bottom: 16px; }
-
-    .auth-label {
-      display: block; font-size: 10px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 6px;
-    }
-
-    .auth-input {
-      width: 100%; padding: 12px 14px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 8px;
-      font-size: 15px; color: var(--white);
-      outline: none; transition: border 0.2s;
-    }
-
-    .auth-input:focus { border-color: var(--gold); }
-    .auth-input::placeholder { color: rgba(255,255,255,0.2); }
-
-    .auth-btn {
-      width: 100%; padding: 14px;
-      background: var(--gold);
-      border: none; border-radius: 8px;
-      font-size: 13px; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--black); cursor: pointer;
-      margin-top: 8px; transition: all 0.2s;
-    }
-
-    .auth-btn:active { transform: scale(0.98); opacity: 0.9; }
-    .auth-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    .auth-error {
-      font-size: 12px; color: #E57373;
-      text-align: center; margin-top: 12px;
-      min-height: 18px;
-    }
-
-    .auth-note {
-      font-size: 11px; color: var(--text-muted);
-      text-align: center; margin-top: 16px;
-      line-height: 1.6;
-    }
-
-    /* ── HEADER ── */
-    #header {
-      width: 100%; height: var(--header-height);
-      background: var(--black);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 18px; flex-shrink: 0;
-      position: relative; z-index: 100;
-      border-bottom: 2px solid var(--gold-dark);
-    }
-
-    #header-logo { display: flex; align-items: baseline; gap: 7px; }
-    #header-logo .the { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 400; }
-    #header-logo .name { font-size: 18px; letter-spacing: 0.06em; color: var(--white); font-weight: 600; font-family: Georgia, serif; }
-    #header-logo .symbol { font-size: 14px; color: var(--gold); margin-left: 4px; }
-
-    #hamburger-btn {
-      width: 40px; height: 40px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 5px; cursor: pointer;
-      border: none; background: transparent;
-      padding: 6px; border-radius: 6px;
-    }
-
-    .ham-line { width: 22px; height: 2px; background: var(--gold); border-radius: 2px; }
-
-    /* ── DRAWER ── */
-    #drawer-overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 200; opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    #drawer-overlay.open { opacity: 1; pointer-events: all; }
-
-    #drawer {
-      position: fixed; top: 0; right: -300px;
-      width: 280px; height: 100%;
-      background: var(--black); z-index: 201;
-      transition: right 0.32s cubic-bezier(0.4,0,0.2,1);
-      display: flex; flex-direction: column;
-      border-left: 1px solid var(--gold-dark);
-    }
-    #drawer.open { right: 0; }
-
-    #drawer-header { padding: 52px 24px 24px; border-bottom: 1px solid rgba(201,168,76,0.25); }
-    #drawer-user-name { font-size: 16px; font-weight: 600; color: var(--white); font-family: Georgia, serif; }
-    #drawer-user-lodge { font-size: 11px; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 3px; }
-
-    #drawer-nav { flex: 1; padding: 16px 0; overflow-y: auto; }
-
-    .drawer-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 24px; cursor: pointer;
-      border: none; background: transparent;
-      width: 100%; text-align: left; transition: background 0.2s;
-    }
-    .drawer-item:active { background: rgba(201,168,76,0.1); }
-    .drawer-item.active { background: rgba(201,168,76,0.12); }
-
-    .drawer-item-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: rgba(201,168,76,0.12);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; flex-shrink: 0;
-      border: 1px solid rgba(201,168,76,0.2);
-    }
-    .drawer-item.active .drawer-item-icon { background: rgba(201,168,76,0.25); border-color: var(--gold); }
-    .drawer-item-label { font-size: 15px; color: var(--text-muted); font-weight: 400; }
-    .drawer-item.active .drawer-item-label { color: var(--gold); font-weight: 500; }
-    .drawer-divider { height: 1px; background: rgba(201,168,76,0.15); margin: 8px 24px; }
-
-    #drawer-footer { padding: 20px 24px 36px; border-top: 1px solid rgba(201,168,76,0.2); }
-    #drawer-footer-version { font-size: 10px; color: rgba(201,168,76,0.4); letter-spacing: 0.15em; text-transform: uppercase; }
-
-    /* ── CONTENT ── */
-    #content {
-      flex: 1; overflow-y: auto; overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-      background: var(--off-white);
-    }
-
-    .section { display: none; min-height: 100%; }
-    .section.active { display: block; }
-
-    /* ── PROFILE ── */
-    .profile-hero {
-      background: var(--black); padding: 36px 24px 28px;
-      display: flex; flex-direction: column; align-items: center;
-    }
-
-    .profile-avatar {
-      width: 96px; height: 96px; border-radius: 50%;
-      border: 3px solid var(--gold);
-      background: var(--off-black);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px; color: var(--gold);
-      font-family: Georgia, serif; overflow: hidden; margin-bottom: 14px;
-      cursor: pointer; position: relative;
-    }
-
-    .avatar-edit-hint {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: rgba(0,0,0,0.6);
-      font-size: 9px; color: var(--gold-light);
-      letter-spacing: 0.1em; text-transform: uppercase;
-      text-align: center; padding: 5px 0;
-    }
-
-    #avatar-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: none; }
-    #avatar-initials { font-size: 32px; }
-    #avatar-file-input { display: none; }
-
-    .profile-name { font-size: 22px; font-weight: 600; color: var(--white); font-family: Georgia, serif; }
-    .profile-tagline { font-size: 11px; color: var(--gold); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
-
-    .profile-stats {
-      display: flex; margin-top: 24px; width: 100%;
-      border-top: 1px solid rgba(201,168,76,0.2);
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-    }
-
-    .profile-stat { flex: 1; padding: 14px 8px; text-align: center; border-right: 1px solid rgba(201,168,76,0.2); }
-    .profile-stat:last-child { border-right: none; }
-    .profile-stat-num { font-size: 20px; font-weight: 600; color: var(--gold); font-family: Georgia, serif; }
-    .profile-stat-label { font-size: 9px; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2px; }
-
-    .profile-body { padding: 20px 18px; }
-
-    .section-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); margin-bottom: 14px; overflow: hidden; }
-    .section-card-header { padding: 14px 16px 12px; border-bottom: 1px solid var(--stone); display: flex; align-items: center; justify-content: space-between; }
-    .section-card-title { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
-    .section-card-body { padding: 16px; }
-
-    .affiliation-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--stone); }
-    .affiliation-row:last-child { border-bottom: none; }
-    .affiliation-badge { width: 38px; height: 38px; border-radius: 8px; background: var(--stone); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-    .affiliation-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
-    .affiliation-role { font-size: 11px; color: var(--gold-dark); letter-spacing: 0.08em; margin-top: 1px; }
-    .affiliation-status { margin-left: auto; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; background: rgba(201,168,76,0.12); color: var(--gold-dark); border: 1px solid rgba(201,168,76,0.3); }
-
-    .trophy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
-    .trophy-item { aspect-ratio: 1; border-radius: 10px; background: var(--stone); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
-    .trophy-item.earned { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.4); }
-    .trophy-emoji { font-size: 22px; }
-    .trophy-label { font-size: 8px; color: var(--text-muted); text-align: center; }
-    .trophy-item.earned .trophy-label { color: var(--gold-dark); }
-
-    .signout-btn {
-      width: 100%; padding: 13px;
-      background: transparent;
-      border: 1px solid rgba(220,80,80,0.4);
-      border-radius: 8px;
-      font-size: 12px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #E57373;
-      cursor: pointer; margin-top: 4px;
-      transition: all 0.2s;
-    }
-    .signout-btn:active { background: rgba(220,80,80,0.1); }
-
-    /* ── MESSAGES ── */
-    .messages-tabs { display: flex; background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
-    .msg-tab { flex: 1; padding: 14px 8px; text-align: center; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; border: none; background: transparent; transition: all 0.2s; }
-    .msg-tab.active { color: var(--gold-dark); border-bottom: 2px solid var(--gold); }
-
-    .msg-list { padding: 8px 0; }
-    .msg-row { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--white); border-bottom: 1px solid var(--stone); cursor: pointer; }
-    .msg-row:active { background: var(--off-white); }
-    .msg-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--stone); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; color: var(--gold-dark); font-family: Georgia, serif; flex-shrink: 0; }
-    .msg-info { flex: 1; min-width: 0; }
-    .msg-name { font-size: 15px; font-weight: 500; color: var(--text-primary); }
-    .msg-preview { font-size: 13px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
-    .msg-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-    .msg-time { font-size: 11px; color: var(--text-muted); }
-    .msg-unread { width: 18px; height: 18px; border-radius: 50%; background: var(--gold); color: var(--black); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-
-    /* ── CALENDAR ── */
-    .cal-month-header { background: var(--white); padding: 16px 18px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-    .cal-month-label { font-size: 17px; font-weight: 600; color: var(--text-primary); font-family: Georgia, serif; }
-    .cal-nav-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--gold-dark); }
-    .cal-grid-wrap { background: var(--white); padding: 10px 14px 14px; }
-    .cal-day-headers { display: grid; grid-template-columns: repeat(7,1fr); margin-bottom: 6px; }
-    .cal-day-hdr { text-align: center; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); padding: 4px 0; }
-    .cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
-    .cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 13px; color: var(--text-primary); cursor: pointer; position: relative; }
-    .cal-day.empty { pointer-events: none; }
-    .cal-day.today { background: var(--gold); color: var(--black); font-weight: 700; }
-    .cal-day.has-event::after { content: ''; position: absolute; bottom: 3px; width: 4px; height: 4px; border-radius: 50%; background: var(--gold-dark); }
-    .cal-day.today::after { background: var(--black); }
-
-    .events-list { padding: 14px 18px; }
-    .events-month-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
-    .event-card { background: var(--white); border-radius: 10px; border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 12px 14px; margin-bottom: 10px; }
-    .event-type-badge { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 4px; }
-    .event-title { font-size: 15px; font-weight: 600; color: var(--text-primary); font-family: Georgia, serif; }
-    .event-meta { font-size: 12px; color: var(--text-muted); margin-top: 5px; display: flex; gap: 12px; }
-    .event-rsvp-btn { margin-top: 10px; padding: 7px 18px; border-radius: 999px; border: 1px solid var(--gold); background: transparent; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); cursor: pointer; }
-    .event-rsvp-btn.rsvpd { background: var(--gold); color: var(--black); font-weight: 600; }
-
-    /* ── GAMES ── */
-    #section-games { background: var(--off-white); padding: 18px; }
-    .games-header { text-align: center; padding: 10px 0 20px; }
-    .games-header-title { font-size: 20px; font-weight: 600; font-family: Georgia, serif; }
-    .games-header-sub { font-size: 11px; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
-    .games-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-    .game-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border); padding: 20px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; text-align: center; transition: all 0.2s; }
-    .game-card:active { transform: scale(0.97); border-color: var(--gold); }
-    .game-icon { font-size: 36px; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: var(--stone); border-radius: 14px; border: 1px solid var(--border); }
-    .game-card.featured .game-icon { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.4); }
-    .game-name { font-size: 14px; font-weight: 600; font-family: Georgia, serif; }
-    .game-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
-    .game-pts { font-size: 10px; color: var(--gold-dark); letter-spacing: 0.1em; text-transform: uppercase; }
-    .leaderboard-strip { background: var(--black); border-radius: 12px; padding: 16px; margin-top: 14px; }
-    .lb-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-    .lb-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .lb-row:last-child { border-bottom: none; }
-    .lb-rank { font-size: 13px; font-weight: 700; color: var(--gold); width: 20px; font-family: Georgia, serif; }
-    .lb-name { flex: 1; font-size: 13px; color: var(--white); }
-    .lb-pts { font-size: 12px; color: var(--gold); font-weight: 600; }
-
-    /* ── LEADERBOARD ── */
-    #section-leaderboard { background: var(--off-white); padding: 18px; }
-    .section-page-header { padding: 18px 18px 14px; background: var(--white); border-bottom: 1px solid var(--border); }
-    .section-page-title { font-size: 22px; font-weight: 600; font-family: Georgia, serif; }
-    .section-page-sub { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
-    .lb-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
-    .lb-tab { flex: 1; padding: 10px 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--white); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; text-align: center; }
-    .lb-tab.active { background: var(--black); border-color: var(--gold-dark); color: var(--gold); }
-    .lb-full-row { background: var(--white); border-radius: 10px; border: 1px solid var(--border); padding: 14px 16px; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-    .lb-full-rank { font-size: 18px; font-weight: 700; font-family: Georgia, serif; color: var(--gold); width: 28px; text-align: center; }
-    .lb-full-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--stone); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; color: var(--gold-dark); font-family: Georgia, serif; flex-shrink: 0; }
-    .lb-full-info { flex: 1; }
-    .lb-full-name { font-size: 14px; font-weight: 500; }
-    .lb-full-org { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-    .lb-full-pts { font-size: 16px; font-weight: 700; color: var(--gold-dark); font-family: Georgia, serif; }
-
-    /* ── BOTTOM NAV ── */
-    #bottom-nav { height: var(--nav-height); background: var(--white); border-top: 1px solid var(--border); display: flex; align-items: center; flex-shrink: 0; position: relative; z-index: 50; }
-    .nav-item { flex: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; cursor: pointer; border: none; background: transparent; }
-    .nav-icon { font-size: 20px; line-height: 1; }
-    .nav-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
-    .nav-item.active .nav-label { color: var(--gold-dark); }
-    .nav-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0; }
-    .nav-item.active .nav-dot { opacity: 1; }
-
-    /* ── TOAST ── */
-    #toast { position: fixed; bottom: calc(var(--nav-height) + 16px); left: 50%; transform: translateX(-50%) translateY(20px); background: var(--off-black); color: var(--gold-light); padding: 10px 20px; border-radius: 999px; font-size: 13px; letter-spacing: 0.05em; border: 1px solid var(--gold-dark); opacity: 0; transition: all 0.3s ease; z-index: 500; white-space: nowrap; }
-    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html,body { width:100%; height:100%; overflow:hidden; background:var(--off-white); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Georgia,sans-serif; color:var(--text-primary); }
+    #app { width:100%; height:100vh; display:flex; flex-direction:column; position:relative; overflow:hidden; }
 
     /* ── LOADING ── */
-    #loading-screen { position: fixed; inset: 0; background: var(--black); z-index: 2000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
-    #loading-screen.hidden { display: none; }
-    .loading-symbol { font-size: 40px; color: var(--gold); }
-    .loading-text { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+    #loading-screen { position:fixed; inset:0; background:var(--black); z-index:2000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; }
+    #loading-screen.hidden { display:none; }
+    .loading-symbol { font-size:40px; color:var(--gold); }
+    .loading-text { font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); }
+
+    /* ── AUTH ── */
+    #auth-screen { position:fixed; inset:0; background:var(--black); z-index:1000; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 24px; }
+    #auth-screen.hidden { display:none; }
+    .auth-logo { text-align:center; margin-bottom:40px; }
+    .auth-logo .the { font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:4px; }
+    .auth-logo .name { font-size:32px; font-weight:600; color:var(--white); font-family:Georgia,serif; letter-spacing:0.05em; }
+    .auth-logo .symbol { display:block; font-size:28px; color:var(--gold); margin-top:8px; }
+    .auth-logo .tagline { font-size:11px; color:var(--text-muted); letter-spacing:0.15em; text-transform:uppercase; margin-top:10px; }
+    .auth-card { width:100%; max-width:360px; background:var(--off-black); border-radius:16px; border:1px solid rgba(201,168,76,0.25); padding:28px 24px; }
+    .auth-tabs { display:flex; margin-bottom:24px; border-bottom:1px solid rgba(201,168,76,0.2); }
+    .auth-tab { flex:1; padding:10px 8px; text-align:center; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); cursor:pointer; border:none; background:transparent; border-bottom:2px solid transparent; margin-bottom:-1px; transition:all 0.2s; }
+    .auth-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .auth-field { margin-bottom:16px; }
+    .auth-label { display:block; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px; }
+    .auth-input { width:100%; padding:12px 14px; background:rgba(255,255,255,0.06); border:1px solid rgba(201,168,76,0.2); border-radius:8px; font-size:15px; color:var(--white); outline:none; transition:border 0.2s; }
+    .auth-input:focus { border-color:var(--gold); }
+    .auth-input::placeholder { color:rgba(255,255,255,0.2); }
+    .auth-btn { width:100%; padding:14px; background:var(--gold); border:none; border-radius:8px; font-size:13px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--black); cursor:pointer; margin-top:8px; transition:all 0.2s; }
+    .auth-btn:active { transform:scale(0.98); opacity:0.9; }
+    .auth-btn:disabled { opacity:0.5; cursor:not-allowed; }
+    .auth-error { font-size:12px; color:#E57373; text-align:center; margin-top:12px; min-height:18px; }
+    .auth-note { font-size:11px; color:var(--text-muted); text-align:center; margin-top:16px; line-height:1.6; }
+
+    /* ── HEADER ── */
+    #header { width:100%; height:var(--header-height); background:var(--black); display:flex; align-items:center; justify-content:space-between; padding:0 18px; flex-shrink:0; position:relative; z-index:100; border-bottom:2px solid var(--gold-dark); }
+    #header-logo { display:flex; align-items:baseline; gap:7px; }
+    #header-logo .the { font-size:10px; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); font-weight:400; }
+    #header-logo .name { font-size:18px; letter-spacing:0.06em; color:var(--white); font-weight:600; font-family:Georgia,serif; }
+    #header-logo .symbol { font-size:14px; color:var(--gold); margin-left:4px; }
+    #hamburger-btn { width:40px; height:40px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; cursor:pointer; border:none; background:transparent; padding:6px; border-radius:6px; }
+    .ham-line { width:22px; height:2px; background:var(--gold); border-radius:2px; }
+
+    /* ── DRAWER ── */
+    #drawer-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:200; opacity:0; pointer-events:none; transition:opacity 0.3s ease; }
+    #drawer-overlay.open { opacity:1; pointer-events:all; }
+    #drawer { position:fixed; top:0; right:-300px; width:280px; height:100%; background:var(--black); z-index:201; transition:right 0.32s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; border-left:1px solid var(--gold-dark); }
+    #drawer.open { right:0; }
+    #drawer-header { padding:52px 24px 24px; border-bottom:1px solid rgba(201,168,76,0.25); }
+    #drawer-user-name { font-size:16px; font-weight:600; color:var(--white); font-family:Georgia,serif; }
+    #drawer-user-lodge { font-size:11px; color:var(--gold); letter-spacing:0.12em; text-transform:uppercase; margin-top:3px; }
+    #drawer-nav { flex:1; padding:16px 0; overflow-y:auto; }
+    .drawer-item { display:flex; align-items:center; gap:14px; padding:14px 24px; cursor:pointer; border:none; background:transparent; width:100%; text-align:left; transition:background 0.2s; }
+    .drawer-item:active { background:rgba(201,168,76,0.1); }
+    .drawer-item.active { background:rgba(201,168,76,0.12); }
+    .drawer-item-icon { width:36px; height:36px; border-radius:8px; background:rgba(201,168,76,0.12); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; border:1px solid rgba(201,168,76,0.2); }
+    .drawer-item.active .drawer-item-icon { background:rgba(201,168,76,0.25); border-color:var(--gold); }
+    .drawer-item-label { font-size:15px; color:var(--text-muted); font-weight:400; }
+    .drawer-item.active .drawer-item-label { color:var(--gold); font-weight:500; }
+    .drawer-divider { height:1px; background:rgba(201,168,76,0.15); margin:8px 24px; }
+    #drawer-footer { padding:20px 24px 36px; border-top:1px solid rgba(201,168,76,0.2); }
+    #drawer-footer-version { font-size:10px; color:rgba(201,168,76,0.4); letter-spacing:0.15em; text-transform:uppercase; }
+
+    /* ── CONTENT ── */
+    #content { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; background:var(--off-white); }
+    .section { display:none; min-height:100%; }
+    .section.active { display:block; }
+
+    /* ── PROFILE ── */
+    .profile-hero { background:var(--black); padding:36px 24px 28px; display:flex; flex-direction:column; align-items:center; }
+    .profile-avatar { width:96px; height:96px; border-radius:50%; border:3px solid var(--gold); background:var(--off-black); display:flex; align-items:center; justify-content:center; font-size:32px; color:var(--gold); font-family:Georgia,serif; overflow:hidden; margin-bottom:14px; cursor:pointer; position:relative; }
+    .avatar-edit-hint { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.6); font-size:9px; color:var(--gold-light); letter-spacing:0.1em; text-transform:uppercase; text-align:center; padding:5px 0; }
+    #avatar-img { width:100%; height:100%; object-fit:cover; border-radius:50%; display:none; }
+    #avatar-file-input { display:none; }
+    .profile-name { font-size:22px; font-weight:600; color:var(--white); font-family:Georgia,serif; }
+    .profile-tagline { font-size:11px; color:var(--gold); letter-spacing:0.18em; text-transform:uppercase; margin-top:4px; }
+    .profile-stats { display:flex; margin-top:24px; width:100%; border-top:1px solid rgba(201,168,76,0.2); border-bottom:1px solid rgba(201,168,76,0.2); }
+    .profile-stat { flex:1; padding:14px 8px; text-align:center; border-right:1px solid rgba(201,168,76,0.2); }
+    .profile-stat:last-child { border-right:none; }
+    .profile-stat-num { font-size:20px; font-weight:600; color:var(--gold); font-family:Georgia,serif; }
+    .profile-stat-label { font-size:9px; color:var(--text-muted); letter-spacing:0.15em; text-transform:uppercase; margin-top:2px; }
+    .profile-body { padding:20px 18px; }
+    .section-card { background:var(--white); border-radius:12px; border:1px solid var(--border); margin-bottom:14px; overflow:hidden; }
+    .section-card-header { padding:14px 16px 12px; border-bottom:1px solid var(--stone); display:flex; align-items:center; justify-content:space-between; }
+    .section-card-title { font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); font-weight:500; }
+    .section-card-body { padding:16px; }
+    .trophy-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+    .trophy-item { aspect-ratio:1; border-radius:10px; background:var(--stone); border:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
+    .trophy-item.earned { background:rgba(201,168,76,0.08); border-color:rgba(201,168,76,0.4); }
+    .trophy-emoji { font-size:22px; }
+    .trophy-label { font-size:8px; color:var(--text-muted); text-align:center; }
+    .trophy-item.earned .trophy-label { color:var(--gold-dark); }
+    .signout-btn { width:100%; padding:13px; background:transparent; border:1px solid rgba(220,80,80,0.4); border-radius:8px; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#E57373; cursor:pointer; margin-top:4px; }
+
+    /* ── MESSAGES LIST ── */
+    #section-messages { background:var(--off-white); display:none; flex-direction:column; }
+    #section-messages.active { display:flex; }
+    .messages-tabs { display:flex; background:var(--white); border-bottom:1px solid var(--border); flex-shrink:0; }
+    .msg-tab { flex:1; padding:14px 8px; text-align:center; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); cursor:pointer; border-bottom:2px solid transparent; border:none; background:transparent; transition:all 0.2s; }
+    .msg-tab.active { color:var(--gold-dark); border-bottom:2px solid var(--gold); }
+    #msg-dms { flex:1; overflow-y:auto; }
+    .msg-row { display:flex; align-items:center; gap:12px; padding:14px 18px; background:var(--white); border-bottom:1px solid var(--stone); cursor:pointer; transition:background 0.15s; }
+    .msg-row:active { background:var(--off-white); }
+    .msg-avatar { width:46px; height:46px; border-radius:50%; background:var(--stone); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; color:var(--gold-dark); font-family:Georgia,serif; flex-shrink:0; overflow:hidden; }
+    .msg-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    .msg-info { flex:1; min-width:0; }
+    .msg-name { font-size:15px; font-weight:500; color:var(--text-primary); }
+    .msg-preview { font-size:13px; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px; }
+    .msg-meta { display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+    .msg-time { font-size:11px; color:var(--text-muted); }
+    .msg-unread { width:18px; height:18px; border-radius:50%; background:var(--gold); color:var(--black); font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+    .msg-empty { padding:48px 24px; text-align:center; color:var(--text-muted); font-size:14px; line-height:1.8; }
+    .msg-empty-icon { font-size:40px; margin-bottom:12px; }
+
+    /* ── CHAT VIEW ── */
+    #chat-view { position:fixed; inset:0; background:var(--off-white); z-index:300; display:none; flex-direction:column; }
+    #chat-view.open { display:flex; }
+    #chat-header { background:var(--black); padding:0 16px; height:var(--header-height); display:flex; align-items:center; gap:12px; flex-shrink:0; border-bottom:2px solid var(--gold-dark); }
+    #chat-back { background:transparent; border:none; color:var(--gold); font-size:22px; cursor:pointer; padding:8px 4px; }
+    #chat-avatar { width:36px; height:36px; border-radius:50%; background:var(--off-black); border:2px solid var(--gold-dark); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; color:var(--gold); font-family:Georgia,serif; flex-shrink:0; overflow:hidden; }
+    #chat-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    #chat-name { flex:1; font-size:16px; font-weight:600; color:var(--white); font-family:Georgia,serif; }
+    #chat-status { font-size:10px; color:var(--gold); letter-spacing:0.1em; }
+    #chat-messages { flex:1; overflow-y:auto; padding:16px; -webkit-overflow-scrolling:touch; }
+    .chat-bubble-wrap { display:flex; margin-bottom:12px; }
+    .chat-bubble-wrap.mine { justify-content:flex-end; }
+    .chat-bubble-wrap.theirs { justify-content:flex-start; }
+    .chat-bubble { max-width:72%; padding:10px 14px; border-radius:18px; font-size:15px; line-height:1.5; word-break:break-word; }
+    .chat-bubble-wrap.mine .chat-bubble { background:var(--gold); color:var(--black); border-bottom-right-radius:4px; }
+    .chat-bubble-wrap.theirs .chat-bubble { background:var(--white); color:var(--text-primary); border:1px solid var(--border); border-bottom-left-radius:4px; }
+    .chat-time { font-size:10px; color:var(--text-muted); margin-top:4px; text-align:right; }
+    .chat-bubble-wrap.theirs .chat-time { text-align:left; }
+    .chat-date-divider { text-align:center; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin:16px 0 8px; }
+    #chat-input-wrap { background:var(--white); border-top:1px solid var(--border); padding:10px 14px; display:flex; align-items:flex-end; gap:10px; flex-shrink:0; padding-bottom:max(10px, env(safe-area-inset-bottom)); }
+    #chat-input { flex:1; background:var(--off-white); border:1px solid var(--border); border-radius:22px; padding:10px 16px; font-size:15px; color:var(--text-primary); outline:none; resize:none; max-height:120px; font-family:inherit; line-height:1.4; }
+    #chat-input:focus { border-color:var(--gold); }
+    #chat-send { width:40px; height:40px; border-radius:50%; background:var(--gold); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; transition:all 0.2s; }
+    #chat-send:active { transform:scale(0.93); }
+    #chat-send:disabled { opacity:0.4; }
+    #chat-loading { display:flex; align-items:center; justify-content:center; padding:32px; color:var(--text-muted); font-size:13px; }
+
+    /* ── NEW MESSAGE BUTTON ── */
+    #new-msg-btn { position:absolute; bottom:calc(var(--nav-height) + 16px); right:18px; width:52px; height:52px; border-radius:50%; background:var(--gold); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 4px 16px rgba(201,168,76,0.4); z-index:50; transition:all 0.2s; }
+    #new-msg-btn:active { transform:scale(0.93); }
+
+    /* ── MEMBER PICKER ── */
+    #member-picker { position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:400; display:none; align-items:flex-end; }
+    #member-picker.open { display:flex; }
+    #member-picker-sheet { background:var(--white); width:100%; border-radius:20px 20px 0 0; padding:20px 0 36px; max-height:70vh; display:flex; flex-direction:column; }
+    #member-picker-title { font-size:13px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); padding:0 18px 14px; border-bottom:1px solid var(--border); }
+    #member-picker-list { overflow-y:auto; flex:1; }
+    .member-pick-row { display:flex; align-items:center; gap:12px; padding:14px 18px; cursor:pointer; border-bottom:1px solid var(--stone); transition:background 0.15s; }
+    .member-pick-row:active { background:var(--off-white); }
+    .member-pick-avatar { width:40px; height:40px; border-radius:50%; background:var(--stone); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:600; color:var(--gold-dark); font-family:Georgia,serif; flex-shrink:0; }
+    .member-pick-name { font-size:15px; font-weight:500; color:var(--text-primary); }
+    .member-pick-empty { padding:32px 18px; text-align:center; color:var(--text-muted); font-size:14px; }
+
+    /* ── CALENDAR ── */
+    .cal-month-header { background:var(--white); padding:16px 18px 12px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .cal-month-label { font-size:17px; font-weight:600; color:var(--text-primary); font-family:Georgia,serif; }
+    .cal-nav-btn { width:32px; height:32px; border-radius:50%; border:1px solid var(--border); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--gold-dark); }
+    .cal-grid-wrap { background:var(--white); padding:10px 14px 14px; }
+    .cal-day-headers { display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:6px; }
+    .cal-day-hdr { text-align:center; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); padding:4px 0; }
+    .cal-days { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+    .cal-day { aspect-ratio:1; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:13px; color:var(--text-primary); cursor:pointer; position:relative; }
+    .cal-day.empty { pointer-events:none; }
+    .cal-day.today { background:var(--gold); color:var(--black); font-weight:700; }
+    .cal-day.has-event::after { content:''; position:absolute; bottom:3px; width:4px; height:4px; border-radius:50%; background:var(--gold-dark); }
+    .cal-day.today::after { background:var(--black); }
+    .events-list { padding:14px 18px; }
+    .events-month-label { font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px; }
+    .event-card { background:var(--white); border-radius:10px; border:1px solid var(--border); border-left:4px solid var(--gold); padding:12px 14px; margin-bottom:10px; }
+    .event-type-badge { font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:4px; }
+    .event-title { font-size:15px; font-weight:600; color:var(--text-primary); font-family:Georgia,serif; }
+    .event-meta { font-size:12px; color:var(--text-muted); margin-top:5px; display:flex; gap:12px; }
+    .event-rsvp-btn { margin-top:10px; padding:7px 18px; border-radius:999px; border:1px solid var(--gold); background:transparent; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-dark); cursor:pointer; }
+    .event-rsvp-btn.rsvpd { background:var(--gold); color:var(--black); font-weight:600; }
+
+    /* ── GAMES ── */
+    #section-games { background:var(--off-white); padding:18px; }
+    .games-header { text-align:center; padding:10px 0 20px; }
+    .games-header-title { font-size:20px; font-weight:600; font-family:Georgia,serif; }
+    .games-header-sub { font-size:11px; color:var(--text-muted); letter-spacing:0.12em; text-transform:uppercase; margin-top:4px; }
+    .games-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+    .game-card { background:var(--white); border-radius:12px; border:1px solid var(--border); padding:20px 14px; display:flex; flex-direction:column; align-items:center; gap:10px; cursor:pointer; text-align:center; transition:all 0.2s; }
+    .game-card:active { transform:scale(0.97); border-color:var(--gold); }
+    .game-icon { font-size:36px; width:64px; height:64px; display:flex; align-items:center; justify-content:center; background:var(--stone); border-radius:14px; border:1px solid var(--border); }
+    .game-card.featured .game-icon { background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.4); }
+    .game-name { font-size:14px; font-weight:600; font-family:Georgia,serif; }
+    .game-desc { font-size:11px; color:var(--text-muted); line-height:1.5; }
+    .game-pts { font-size:10px; color:var(--gold-dark); letter-spacing:0.1em; text-transform:uppercase; }
+    .leaderboard-strip { background:var(--black); border-radius:12px; padding:16px; margin-top:14px; }
+    .lb-title { font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .lb-row { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .lb-row:last-child { border-bottom:none; }
+    .lb-rank { font-size:13px; font-weight:700; color:var(--gold); width:20px; font-family:Georgia,serif; }
+    .lb-name { flex:1; font-size:13px; color:var(--white); }
+    .lb-pts { font-size:12px; color:var(--gold); font-weight:600; }
+
+    /* ── LEADERBOARD ── */
+    #section-leaderboard { background:var(--off-white); padding:18px; }
+    .section-page-header { padding:18px 18px 14px; background:var(--white); border-bottom:1px solid var(--border); }
+    .section-page-title { font-size:22px; font-weight:600; font-family:Georgia,serif; }
+    .section-page-sub { font-size:11px; color:var(--text-muted); letter-spacing:0.1em; text-transform:uppercase; margin-top:2px; }
+    .lb-tabs { display:flex; gap:8px; margin-bottom:16px; }
+    .lb-tab { flex:1; padding:10px 8px; border-radius:8px; border:1px solid var(--border); background:var(--white); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); cursor:pointer; text-align:center; }
+    .lb-tab.active { background:var(--black); border-color:var(--gold-dark); color:var(--gold); }
+    .lb-full-row { background:var(--white); border-radius:10px; border:1px solid var(--border); padding:14px 16px; display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+    .lb-full-rank { font-size:18px; font-weight:700; font-family:Georgia,serif; color:var(--gold); width:28px; text-align:center; }
+    .lb-full-avatar { width:42px; height:42px; border-radius:50%; background:var(--stone); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:600; color:var(--gold-dark); font-family:Georgia,serif; flex-shrink:0; }
+    .lb-full-info { flex:1; }
+    .lb-full-name { font-size:14px; font-weight:500; }
+    .lb-full-org { font-size:11px; color:var(--text-muted); margin-top:1px; }
+    .lb-full-pts { font-size:16px; font-weight:700; color:var(--gold-dark); font-family:Georgia,serif; }
+
+    /* ── BOTTOM NAV ── */
+    #bottom-nav { height:var(--nav-height); background:var(--white); border-top:1px solid var(--border); display:flex; align-items:center; flex-shrink:0; position:relative; z-index:50; }
+    .nav-item { flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; cursor:pointer; border:none; background:transparent; position:relative; }
+    .nav-icon { font-size:20px; line-height:1; }
+    .nav-label { font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); }
+    .nav-item.active .nav-label { color:var(--gold-dark); }
+    .nav-dot { width:4px; height:4px; border-radius:50%; background:var(--gold); opacity:0; }
+    .nav-item.active .nav-dot { opacity:1; }
+    .nav-badge { position:absolute; top:6px; right:calc(50% - 18px); background:#E57373; color:white; font-size:9px; font-weight:700; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; opacity:0; }
+    .nav-badge.show { opacity:1; }
+
+    /* ── TOAST ── */
+    #toast { position:fixed; bottom:calc(var(--nav-height)+16px); left:50%; transform:translateX(-50%) translateY(20px); background:var(--off-black); color:var(--gold-light); padding:10px 20px; border-radius:999px; font-size:13px; letter-spacing:0.05em; border:1px solid var(--gold-dark); opacity:0; transition:all 0.3s ease; z-index:500; white-space:nowrap; }
+    #toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
 
-<!-- LOADING -->
 <div id="loading-screen">
   <div class="loading-symbol">⧖</div>
   <div class="loading-text">The Plumb Line</div>
 </div>
 
-<!-- AUTH -->
 <div id="auth-screen" class="hidden">
   <div class="auth-logo">
     <span class="the">The</span>
@@ -427,39 +276,17 @@
       <button class="auth-tab active" onclick="switchAuthTab('signin')">Sign In</button>
       <button class="auth-tab" onclick="switchAuthTab('signup')">Join</button>
     </div>
-
-    <!-- SIGN IN -->
     <div id="signin-form">
-      <div class="auth-field">
-        <label class="auth-label">Email</label>
-        <input class="auth-input" id="signin-email" type="email" placeholder="your@email.com" autocomplete="email"/>
-      </div>
-      <div class="auth-field">
-        <label class="auth-label">Password</label>
-        <input class="auth-input" id="signin-password" type="password" placeholder="••••••••" autocomplete="current-password"/>
-      </div>
+      <div class="auth-field"><label class="auth-label">Email</label><input class="auth-input" id="signin-email" type="email" placeholder="your@email.com" autocomplete="email"/></div>
+      <div class="auth-field"><label class="auth-label">Password</label><input class="auth-input" id="signin-password" type="password" placeholder="••••••••" autocomplete="current-password"/></div>
       <button class="auth-btn" id="signin-btn" onclick="signIn()">Enter the Lodge</button>
       <div class="auth-error" id="signin-error"></div>
     </div>
-
-    <!-- SIGN UP -->
     <div id="signup-form" style="display:none">
-      <div class="auth-field">
-        <label class="auth-label">Invite Code</label>
-        <input class="auth-input" id="signup-code" type="text" placeholder="Enter your invite code"/>
-      </div>
-      <div class="auth-field">
-        <label class="auth-label">Full Name</label>
-        <input class="auth-input" id="signup-name" type="text" placeholder="Brother John Smith"/>
-      </div>
-      <div class="auth-field">
-        <label class="auth-label">Email</label>
-        <input class="auth-input" id="signup-email" type="email" placeholder="your@email.com" autocomplete="email"/>
-      </div>
-      <div class="auth-field">
-        <label class="auth-label">Password</label>
-        <input class="auth-input" id="signup-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password"/>
-      </div>
+      <div class="auth-field"><label class="auth-label">Invite Code</label><input class="auth-input" id="signup-code" type="text" placeholder="Enter your invite code"/></div>
+      <div class="auth-field"><label class="auth-label">Full Name</label><input class="auth-input" id="signup-name" type="text" placeholder="Brother John Smith"/></div>
+      <div class="auth-field"><label class="auth-label">Email</label><input class="auth-input" id="signup-email" type="email" placeholder="your@email.com" autocomplete="email"/></div>
+      <div class="auth-field"><label class="auth-label">Password</label><input class="auth-input" id="signup-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password"/></div>
       <button class="auth-btn" id="signup-btn" onclick="signUp()">Request Admission</button>
       <div class="auth-error" id="signup-error"></div>
       <div class="auth-note">You must be invited by an existing member.<br>Contact your lodge secretary for a code.</div>
@@ -467,18 +294,13 @@
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div id="app">
   <div id="header">
     <div id="header-logo">
-      <span class="the">The</span>
-      <span class="name">Plumb Line</span>
-      <span class="symbol">⧖</span>
+      <span class="the">The</span><span class="name">Plumb Line</span><span class="symbol">⧖</span>
     </div>
     <button id="hamburger-btn" onclick="toggleDrawer()">
-      <div class="ham-line"></div>
-      <div class="ham-line"></div>
-      <div class="ham-line"></div>
+      <div class="ham-line"></div><div class="ham-line"></div><div class="ham-line"></div>
     </button>
   </div>
 
@@ -489,36 +311,18 @@
       <div id="drawer-user-lodge">Member</div>
     </div>
     <div id="drawer-nav">
-      <button class="drawer-item active" onclick="navigateTo('profile');closeDrawer()">
-        <div class="drawer-item-icon">👤</div><span class="drawer-item-label">My Profile</span>
-      </button>
-      <button class="drawer-item" onclick="navigateTo('messages');closeDrawer()">
-        <div class="drawer-item-icon">💬</div><span class="drawer-item-label">Messages</span>
-      </button>
-      <button class="drawer-item" onclick="navigateTo('calendar');closeDrawer()">
-        <div class="drawer-item-icon">📅</div><span class="drawer-item-label">Calendar</span>
-      </button>
-      <button class="drawer-item" onclick="navigateTo('games');closeDrawer()">
-        <div class="drawer-item-icon">🎮</div><span class="drawer-item-label">Games Lobby</span>
-      </button>
-      <button class="drawer-item" onclick="navigateTo('leaderboard');closeDrawer()">
-        <div class="drawer-item-icon">🏆</div><span class="drawer-item-label">Leaderboard</span>
-      </button>
+      <button class="drawer-item active" onclick="navigateTo('profile');closeDrawer()"><div class="drawer-item-icon">👤</div><span class="drawer-item-label">My Profile</span></button>
+      <button class="drawer-item" onclick="navigateTo('messages');closeDrawer()"><div class="drawer-item-icon">💬</div><span class="drawer-item-label">Messages</span></button>
+      <button class="drawer-item" onclick="navigateTo('calendar');closeDrawer()"><div class="drawer-item-icon">📅</div><span class="drawer-item-label">Calendar</span></button>
+      <button class="drawer-item" onclick="navigateTo('games');closeDrawer()"><div class="drawer-item-icon">🎮</div><span class="drawer-item-label">Games Lobby</span></button>
+      <button class="drawer-item" onclick="navigateTo('leaderboard');closeDrawer()"><div class="drawer-item-icon">🏆</div><span class="drawer-item-label">Leaderboard</span></button>
       <div class="drawer-divider"></div>
-      <button class="drawer-item" onclick="showToast('Settings coming soon');closeDrawer()">
-        <div class="drawer-item-icon">⚙️</div><span class="drawer-item-label">Settings</span>
-      </button>
-      <button class="drawer-item" onclick="showToast('Admin panel coming soon');closeDrawer()">
-        <div class="drawer-item-icon">🔑</div><span class="drawer-item-label">Admin Panel</span>
-      </button>
+      <button class="drawer-item" onclick="showToast('Settings coming soon');closeDrawer()"><div class="drawer-item-icon">⚙️</div><span class="drawer-item-label">Settings</span></button>
+      <button class="drawer-item" onclick="showToast('Admin panel coming soon');closeDrawer()"><div class="drawer-item-icon">🔑</div><span class="drawer-item-label">Admin Panel</span></button>
       <div class="drawer-divider"></div>
-      <button class="drawer-item" onclick="signOut();closeDrawer()">
-        <div class="drawer-item-icon">🚪</div><span class="drawer-item-label" style="color:#E57373">Sign Out</span>
-      </button>
+      <button class="drawer-item" onclick="signOut();closeDrawer()"><div class="drawer-item-icon">🚪</div><span class="drawer-item-label" style="color:#E57373">Sign Out</span></button>
     </div>
-    <div id="drawer-footer">
-      <div id="drawer-footer-version">The Plumb Line · v0.2 · Stage 2</div>
-    </div>
+    <div id="drawer-footer"><div id="drawer-footer-version">The Plumb Line · v0.3 · Stage 3</div></div>
   </div>
 
   <div id="content">
@@ -527,37 +331,23 @@
     <div id="section-profile" class="section active">
       <div class="profile-hero">
         <div class="profile-avatar" onclick="document.getElementById('avatar-file-input').click()">
-          <img id="avatar-img" src="" alt="Profile photo"/>
+          <img id="avatar-img" src="" alt=""/>
           <span id="avatar-initials">?</span>
           <div class="avatar-edit-hint">tap to change</div>
         </div>
         <input type="file" id="avatar-file-input" accept="image/*" onchange="handleAvatarChange(event)"/>
         <div class="profile-name" id="profile-display-name">Brother</div>
-        <div class="profile-tagline" id="profile-tagline">Member</div>
+        <div class="profile-tagline">Member · The Plumb Line</div>
         <div class="profile-stats">
-          <div class="profile-stat">
-            <div class="profile-stat-num" id="stat-points">0</div>
-            <div class="profile-stat-label">Points</div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-num" id="stat-lodges">0</div>
-            <div class="profile-stat-label">Lodges</div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-num" id="stat-events">0</div>
-            <div class="profile-stat-label">Events</div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-num" id="stat-rank">—</div>
-            <div class="profile-stat-label">Rank</div>
-          </div>
+          <div class="profile-stat"><div class="profile-stat-num">0</div><div class="profile-stat-label">Points</div></div>
+          <div class="profile-stat"><div class="profile-stat-num">0</div><div class="profile-stat-label">Lodges</div></div>
+          <div class="profile-stat"><div class="profile-stat-num">0</div><div class="profile-stat-label">Events</div></div>
+          <div class="profile-stat"><div class="profile-stat-num">—</div><div class="profile-stat-label">Rank</div></div>
         </div>
       </div>
       <div class="profile-body">
         <div class="section-card">
-          <div class="section-card-header">
-            <span class="section-card-title">Account</span>
-          </div>
+          <div class="section-card-header"><span class="section-card-title">Account</span></div>
           <div class="section-card-body">
             <div style="font-size:13px;color:var(--text-muted);margin-bottom:6px;">Signed in as</div>
             <div style="font-size:15px;color:var(--text-primary);font-weight:500;" id="profile-email">—</div>
@@ -565,60 +355,17 @@
           </div>
         </div>
         <div class="section-card">
-          <div class="section-card-header">
-            <span class="section-card-title">Affiliations</span>
-            <span style="font-size:11px;color:var(--gold-dark);">Pending approval</span>
-          </div>
-          <div class="section-card-body" style="padding:4px 16px;">
-            <div class="affiliation-row">
-              <div class="affiliation-badge">🏛️</div>
-              <div>
-                <div class="affiliation-name">Harmony Lodge No. 12</div>
-                <div class="affiliation-role">Member</div>
-              </div>
-              <div class="affiliation-status">Pending</div>
-            </div>
-          </div>
-        </div>
-        <div class="section-card">
-          <div class="section-card-header">
-            <span class="section-card-title">Trophy Case</span>
-            <span style="font-size:11px;color:var(--gold-dark);">1 of 24 earned</span>
-          </div>
+          <div class="section-card-header"><span class="section-card-title">Trophy Case</span><span style="font-size:11px;color:var(--gold-dark);">1 of 24 earned</span></div>
           <div class="section-card-body">
             <div class="trophy-grid">
-              <div class="trophy-item earned">
-                <div class="trophy-emoji">🏅</div>
-                <div class="trophy-label">First Login</div>
-              </div>
-              <div class="trophy-item">
-                <div class="trophy-emoji" style="opacity:0.2">🤝</div>
-                <div class="trophy-label">Brotherly</div>
-              </div>
-              <div class="trophy-item">
-                <div class="trophy-emoji" style="opacity:0.2">📅</div>
-                <div class="trophy-label">10 Events</div>
-              </div>
-              <div class="trophy-item">
-                <div class="trophy-emoji" style="opacity:0.2">⭐</div>
-                <div class="trophy-label">Multi-Lodge</div>
-              </div>
-              <div class="trophy-item">
-                <div class="trophy-emoji" style="opacity:0.2">🎯</div>
-                <div class="trophy-label">Trivia Pro</div>
-              </div>
-              <div class="trophy-item">
-                <div class="trophy-emoji" style="opacity:0.2">🔑</div>
-                <div class="trophy-label">Officer</div>
-              </div>
-              <div class="trophy-item">
-                <div class="trophy-emoji" style="opacity:0.2">🏆</div>
-                <div class="trophy-label">Top 5</div>
-              </div>
-              <div class="trophy-item">
-                <div class="trophy-emoji" style="opacity:0.2">🕯️</div>
-                <div class="trophy-label">50 Events</div>
-              </div>
+              <div class="trophy-item earned"><div class="trophy-emoji">🏅</div><div class="trophy-label">First Login</div></div>
+              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🤝</div><div class="trophy-label">Brotherly</div></div>
+              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">📅</div><div class="trophy-label">10 Events</div></div>
+              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">⭐</div><div class="trophy-label">Multi-Lodge</div></div>
+              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🎯</div><div class="trophy-label">Trivia Pro</div></div>
+              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🔑</div><div class="trophy-label">Officer</div></div>
+              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🏆</div><div class="trophy-label">Top 5</div></div>
+              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🕯️</div><div class="trophy-label">50 Events</div></div>
             </div>
           </div>
         </div>
@@ -626,30 +373,15 @@
     </div>
 
     <!-- MESSAGES -->
-    <div id="section-messages" class="section">
+    <div id="section-messages" class="section" style="position:relative;">
       <div class="messages-tabs">
-        <button class="msg-tab active" onclick="switchMsgTab(this,'dms')">Direct Messages</button>
-        <button class="msg-tab" onclick="switchMsgTab(this,'groups')">Group Chats</button>
+        <button class="msg-tab active">Direct Messages</button>
+        <button class="msg-tab" onclick="showToast('Group chats coming in Stage 4')">Group Chats</button>
       </div>
-      <div id="msg-dms" class="msg-list">
-        <div class="msg-row" onclick="showToast('Chat view coming in Stage 3')">
-          <div class="msg-avatar">RH</div>
-          <div class="msg-info"><div class="msg-name">Bro. Robert Harris</div><div class="msg-preview">Are you attending the meeting Thursday?</div></div>
-          <div class="msg-meta"><div class="msg-time">2m ago</div><div class="msg-unread">2</div></div>
-        </div>
-        <div class="msg-row" onclick="showToast('Chat view coming in Stage 3')">
-          <div class="msg-avatar">TM</div>
-          <div class="msg-info"><div class="msg-name">W.M. Thomas Mitchell</div><div class="msg-preview">The degree work schedule has been updated.</div></div>
-          <div class="msg-meta"><div class="msg-time">1h ago</div></div>
-        </div>
+      <div id="msg-dms">
+        <div id="msg-list-content"></div>
       </div>
-      <div id="msg-groups" class="msg-list" style="display:none">
-        <div class="msg-row" onclick="showToast('Chat view coming in Stage 3')">
-          <div class="msg-avatar" style="border-radius:10px;">🏛️</div>
-          <div class="msg-info"><div class="msg-name">Harmony Lodge No. 12</div><div class="msg-preview">W.M. Mitchell: Reminder — stated meeting 7pm</div></div>
-          <div class="msg-meta"><div class="msg-time">3h ago</div><div class="msg-unread">5</div></div>
-        </div>
-      </div>
+      <button id="new-msg-btn" onclick="openMemberPicker()" title="New Message">✏️</button>
     </div>
 
     <!-- CALENDAR -->
@@ -690,62 +422,26 @@
 
     <!-- GAMES -->
     <div id="section-games" class="section">
-      <div class="games-header">
-        <div class="games-header-title">Games Lobby</div>
-        <div class="games-header-sub">Earn points for your lodge</div>
-      </div>
+      <div class="games-header"><div class="games-header-title">Games Lobby</div><div class="games-header-sub">Earn points for your lodge</div></div>
       <div class="games-grid">
-        <div class="game-card featured" onclick="showToast('Masonic Trivia launching soon!')">
-          <div class="game-icon">🔺</div>
-          <div class="game-name">Masonic Trivia</div>
-          <div class="game-desc">Test your knowledge of ritual, history & symbolism</div>
-          <div class="game-pts">+50 pts per win</div>
-        </div>
-        <div class="game-card" onclick="showToast('Word of the Day coming soon!')">
-          <div class="game-icon">📜</div>
-          <div class="game-name">Word of the Day</div>
-          <div class="game-desc">Daily Masonic vocabulary challenge</div>
-          <div class="game-pts">+15 pts daily</div>
-        </div>
-        <div class="game-card" onclick="showToast('Symbol Match coming soon!')">
-          <div class="game-icon">🔵</div>
-          <div class="game-name">Symbol Match</div>
-          <div class="game-desc">Match Masonic symbols to their meaning</div>
-          <div class="game-pts">+25 pts per round</div>
-        </div>
-        <div class="game-card" onclick="showToast('Opening Masonic Minute...')">
-          <div class="game-icon">🧘</div>
-          <div class="game-name">Masonic Minute</div>
-          <div class="game-desc">A moment of reflection and calm</div>
-          <div class="game-pts">+10 pts daily</div>
-        </div>
-        <div class="game-card" onclick="showToast('Cipher Challenge coming soon!')">
-          <div class="game-icon">🔐</div>
-          <div class="game-name">Cipher Challenge</div>
-          <div class="game-desc">Decode Masonic ciphers and symbols</div>
-          <div class="game-pts">+35 pts per win</div>
-        </div>
-        <div class="game-card" onclick="showToast('Card games coming soon!')">
-          <div class="game-icon">🃏</div>
-          <div class="game-name">Card Games</div>
-          <div class="game-desc">Classic card games with lodge scoring</div>
-          <div class="game-pts">+20 pts per win</div>
-        </div>
+        <div class="game-card featured" onclick="showToast('Masonic Trivia launching soon!')"><div class="game-icon">🔺</div><div class="game-name">Masonic Trivia</div><div class="game-desc">Test your knowledge of ritual, history & symbolism</div><div class="game-pts">+50 pts per win</div></div>
+        <div class="game-card" onclick="showToast('Word of the Day coming soon!')"><div class="game-icon">📜</div><div class="game-name">Word of the Day</div><div class="game-desc">Daily Masonic vocabulary challenge</div><div class="game-pts">+15 pts daily</div></div>
+        <div class="game-card" onclick="showToast('Symbol Match coming soon!')"><div class="game-icon">🔵</div><div class="game-name">Symbol Match</div><div class="game-desc">Match Masonic symbols to their meaning</div><div class="game-pts">+25 pts per round</div></div>
+        <div class="game-card" onclick="showToast('Opening Masonic Minute...')"><div class="game-icon">🧘</div><div class="game-name">Masonic Minute</div><div class="game-desc">A moment of reflection and calm</div><div class="game-pts">+10 pts daily</div></div>
+        <div class="game-card" onclick="showToast('Cipher Challenge coming soon!')"><div class="game-icon">🔐</div><div class="game-name">Cipher Challenge</div><div class="game-desc">Decode Masonic ciphers and symbols</div><div class="game-pts">+35 pts per win</div></div>
+        <div class="game-card" onclick="showToast('Card games coming soon!')"><div class="game-icon">🃏</div><div class="game-name">Card Games</div><div class="game-desc">Classic card games with lodge scoring</div><div class="game-pts">+20 pts per win</div></div>
       </div>
       <div class="leaderboard-strip">
         <div class="lb-title">Top Players This Week</div>
         <div class="lb-row"><div class="lb-rank">1</div><div class="lb-name">Bro. Thomas Mitchell</div><div class="lb-pts">2,840 pts</div></div>
         <div class="lb-row"><div class="lb-rank">2</div><div class="lb-name">Bro. Edward Lawson</div><div class="lb-pts">2,310 pts</div></div>
-        <div class="lb-row"><div class="lb-rank">3</div><div class="lb-name">Bro. James Wilson</div><div class="lb-pts">1,240 pts</div></div>
+        <div class="lb-row"><div class="lb-rank">3</div><div class="lb-name">You</div><div class="lb-pts">0 pts</div></div>
       </div>
     </div>
 
     <!-- LEADERBOARD -->
     <div id="section-leaderboard" class="section">
-      <div class="section-page-header">
-        <div class="section-page-title">Leaderboard</div>
-        <div class="section-page-sub">April 2026</div>
-      </div>
+      <div class="section-page-header"><div class="section-page-title">Leaderboard</div><div class="section-page-sub">April 2026</div></div>
       <div style="padding:18px;">
         <div class="lb-tabs">
           <button class="lb-tab active" onclick="switchLbTab(this,'members')">Members</button>
@@ -754,7 +450,7 @@
         <div id="lb-members">
           <div class="lb-full-row"><div class="lb-full-rank">1</div><div class="lb-full-avatar">TM</div><div class="lb-full-info"><div class="lb-full-name">W.M. Thomas Mitchell</div><div class="lb-full-org">Harmony Lodge No. 12</div></div><div class="lb-full-pts">2,840</div></div>
           <div class="lb-full-row"><div class="lb-full-rank">2</div><div class="lb-full-avatar">EL</div><div class="lb-full-info"><div class="lb-full-name">Bro. Edward Lawson</div><div class="lb-full-org">Scottish Rite Valley</div></div><div class="lb-full-pts">2,310</div></div>
-          <div class="lb-full-row" style="border:2px solid var(--gold);"><div class="lb-full-rank">—</div><div class="lb-full-avatar" id="lb-my-avatar" style="border-color:var(--gold);">?</div><div class="lb-full-info"><div class="lb-full-name" id="lb-my-name">You</div><div class="lb-full-org">New member</div></div><div class="lb-full-pts" id="lb-my-pts">0</div></div>
+          <div class="lb-full-row" style="border:2px solid var(--gold);"><div class="lb-full-rank">—</div><div class="lb-full-avatar" id="lb-my-avatar" style="border-color:var(--gold);">?</div><div class="lb-full-info"><div class="lb-full-name" id="lb-my-name">You</div><div class="lb-full-org">New member</div></div><div class="lb-full-pts">0</div></div>
         </div>
         <div id="lb-lodges" style="display:none">
           <div class="lb-full-row"><div class="lb-full-rank">1</div><div class="lb-full-avatar" style="border-radius:10px;font-size:20px;">🏛️</div><div class="lb-full-info"><div class="lb-full-name">Harmony Lodge No. 12</div><div class="lb-full-org">Blue Lodge · 42 members</div></div><div class="lb-full-pts">14,200</div></div>
@@ -767,10 +463,35 @@
 
   <div id="bottom-nav">
     <button class="nav-item active" onclick="navigateTo('profile')"><div class="nav-icon">👤</div><div class="nav-dot"></div><div class="nav-label">Profile</div></button>
-    <button class="nav-item" onclick="navigateTo('messages')"><div class="nav-icon">💬</div><div class="nav-dot"></div><div class="nav-label">Messages</div></button>
+    <button class="nav-item" onclick="navigateTo('messages')"><div class="nav-icon">💬</div><div class="nav-dot"></div><div class="nav-badge" id="msg-badge"></div><div class="nav-label">Messages</div></button>
     <button class="nav-item" onclick="navigateTo('calendar')"><div class="nav-icon">📅</div><div class="nav-dot"></div><div class="nav-label">Calendar</div></button>
     <button class="nav-item" onclick="navigateTo('games')"><div class="nav-icon">🎮</div><div class="nav-dot"></div><div class="nav-label">Games</div></button>
     <button class="nav-item" onclick="navigateTo('leaderboard')"><div class="nav-icon">🏆</div><div class="nav-dot"></div><div class="nav-label">Rankings</div></button>
+  </div>
+</div>
+
+<!-- CHAT VIEW -->
+<div id="chat-view">
+  <div id="chat-header">
+    <button id="chat-back" onclick="closeChat()">‹</button>
+    <div id="chat-avatar"><span id="chat-avatar-initials"></span></div>
+    <div>
+      <div id="chat-name"></div>
+      <div id="chat-status">Member</div>
+    </div>
+  </div>
+  <div id="chat-messages"><div id="chat-loading">Loading messages...</div></div>
+  <div id="chat-input-wrap">
+    <textarea id="chat-input" placeholder="Message..." rows="1" onkeydown="handleChatKey(event)" oninput="autoResize(this)"></textarea>
+    <button id="chat-send" onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<!-- MEMBER PICKER -->
+<div id="member-picker" onclick="closeMemberPicker(event)">
+  <div id="member-picker-sheet">
+    <div id="member-picker-title">New Message — Select a Member</div>
+    <div id="member-picker-list"></div>
   </div>
 </div>
 
@@ -779,33 +500,35 @@
 <script>
 (function() {
 
-  /* ── SUPABASE INIT ── */
   const SUPABASE_URL = 'https://tbzqkbnjmuftxupnwnqw.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_DKJiq9QnFoJlgglOJBZRYQ_n58Uq2J1';
+  const VALID_CODES  = ['HIRAM2026','SOLOMONS','PLUMBLINE','CRAFTSMAN'];
+
   const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  /* Valid invite codes — in Stage 3 these will live in the database */
-  const VALID_CODES = ['HIRAM2026', 'SOLOMONS', 'PLUMBLINE', 'CRAFTSMAN'];
+  let currentUser    = null;
+  let currentChat    = null; // { id, name, initials }
+  let realtimeSub    = null;
+  let conversations  = {};   // keyed by other user id
+  let allProfiles    = [];
 
-  let currentUser = null;
-
-  /* ── BOOT ── */
+  /* ══════════════════════════════
+     BOOT
+  ══════════════════════════════ */
   async function boot() {
     const { data: { session } } = await sb.auth.getSession();
-    if (session) {
-      currentUser = session.user;
-      showApp();
-    } else {
-      showAuth();
-    }
+    if (session) { currentUser = session.user; await showApp(); }
+    else showAuth();
     document.getElementById('loading-screen').classList.add('hidden');
   }
 
-  function showApp() {
+  async function showApp() {
     document.getElementById('auth-screen').classList.add('hidden');
     document.getElementById('app').style.display = 'flex';
     populateProfile();
     buildCalendar();
+    await loadConversations();
+    subscribeToMessages();
   }
 
   function showAuth() {
@@ -813,13 +536,14 @@
     document.getElementById('app').style.display = 'none';
   }
 
-  /* ── POPULATE PROFILE ── */
+  /* ══════════════════════════════
+     PROFILE
+  ══════════════════════════════ */
   function populateProfile() {
     if (!currentUser) return;
-    const meta = currentUser.user_metadata || {};
-    const name = meta.full_name || currentUser.email.split('@')[0];
-    const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
-
+    const meta     = currentUser.user_metadata || {};
+    const name     = meta.full_name || currentUser.email.split('@')[0];
+    const initials = name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
     document.getElementById('profile-display-name').textContent = name;
     document.getElementById('profile-email').textContent = currentUser.email;
     document.getElementById('avatar-initials').textContent = initials;
@@ -827,197 +551,360 @@
     document.getElementById('drawer-user-lodge').textContent = 'Member · The Plumb Line';
     document.getElementById('lb-my-name').textContent = name;
     document.getElementById('lb-my-avatar').textContent = initials;
-
-    const savedAvatar = localStorage.getItem('pl_avatar_' + currentUser.id);
-    if (savedAvatar) {
-      document.getElementById('avatar-img').src = savedAvatar;
-      document.getElementById('avatar-img').style.display = 'block';
-      document.getElementById('avatar-initials').style.display = 'none';
-    }
+    const saved = localStorage.getItem('pl_avatar_'+currentUser.id);
+    if (saved) { document.getElementById('avatar-img').src=saved; document.getElementById('avatar-img').style.display='block'; document.getElementById('avatar-initials').style.display='none'; }
   }
 
-  /* ── AVATAR UPLOAD ── */
   window.handleAvatarChange = function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
+    const file = e.target.files[0]; if(!file) return;
     const reader = new FileReader();
-    reader.onload = function(ev) {
-      const data = ev.target.result;
-      document.getElementById('avatar-img').src = data;
+    reader.onload = ev => {
+      const d = ev.target.result;
+      document.getElementById('avatar-img').src = d;
       document.getElementById('avatar-img').style.display = 'block';
       document.getElementById('avatar-initials').style.display = 'none';
-      if (currentUser) localStorage.setItem('pl_avatar_' + currentUser.id, data);
+      if (currentUser) localStorage.setItem('pl_avatar_'+currentUser.id, d);
       showToast('Photo updated!');
     };
     reader.readAsDataURL(file);
   };
 
-  /* ── AUTH: SIGN IN ── */
-  window.signIn = async function() {
-    const email = document.getElementById('signin-email').value.trim();
-    const password = document.getElementById('signin-password').value;
-    const btn = document.getElementById('signin-btn');
-    const err = document.getElementById('signin-error');
+  /* ══════════════════════════════
+     MESSAGING — LOAD CONVERSATIONS
+  ══════════════════════════════ */
+  async function loadConversations() {
+    if (!currentUser) return;
+    const { data, error } = await sb
+      .from('messages')
+      .select('*')
+      .or(`sender_id.eq.${currentUser.id},recipient_id.eq.${currentUser.id}`)
+      .order('created_at', { ascending: false });
 
-    if (!email || !password) { err.textContent = 'Please fill in all fields.'; return; }
-    btn.disabled = true;
-    btn.textContent = 'Signing in...';
-    err.textContent = '';
+    if (error) { console.error(error); return; }
 
-    const { data, error } = await sb.auth.signInWithPassword({ email, password });
-    if (error) {
-      err.textContent = 'Invalid email or password. Please try again.';
-      btn.disabled = false;
-      btn.textContent = 'Enter the Lodge';
-    } else {
-      currentUser = data.user;
-      showApp();
-    }
-  };
-
-  /* ── AUTH: SIGN UP ── */
-  window.signUp = async function() {
-    const code     = document.getElementById('signup-code').value.trim().toUpperCase();
-    const name     = document.getElementById('signup-name').value.trim();
-    const email    = document.getElementById('signup-email').value.trim();
-    const password = document.getElementById('signup-password').value;
-    const btn      = document.getElementById('signup-btn');
-    const err      = document.getElementById('signup-error');
-
-    err.textContent = '';
-
-    if (!code || !name || !email || !password) { err.textContent = 'Please fill in all fields.'; return; }
-    if (!VALID_CODES.includes(code)) { err.textContent = 'Invalid invite code. Contact your lodge secretary.'; return; }
-    if (password.length < 8) { err.textContent = 'Password must be at least 8 characters.'; return; }
-
-    btn.disabled = true;
-    btn.textContent = 'Creating account...';
-
-    const { data, error } = await sb.auth.signUp({
-      email, password,
-      options: { data: { full_name: name, invite_code: code } }
+    conversations = {};
+    (data || []).forEach(msg => {
+      const otherId = msg.sender_id === currentUser.id ? msg.recipient_id : msg.sender_id;
+      if (!conversations[otherId]) conversations[otherId] = { lastMsg: msg, unread: 0 };
+      if (!msg.read && msg.recipient_id === currentUser.id) conversations[otherId].unread++;
     });
 
-    if (error) {
-      err.textContent = error.message;
-      btn.disabled = false;
-      btn.textContent = 'Request Admission';
-    } else {
-      currentUser = data.user;
-      if (data.session) {
-        showApp();
-        showToast('Welcome, Brother ' + name.split(' ').pop() + '!');
-      } else {
-        err.style.color = '#81C784';
-        err.textContent = 'Check your email to confirm your account, then sign in.';
-        btn.textContent = 'Email sent!';
-      }
-    }
-  };
-
-  /* ── AUTH: SIGN OUT ── */
-  window.signOut = async function() {
-    await sb.auth.signOut();
-    currentUser = null;
-    showAuth();
-    showToast('Signed out. Until next time, Brother.');
-  };
-
-  /* ── AUTH TAB SWITCH ── */
-  window.switchAuthTab = function(tab) {
-    document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0 && tab==='signin') || (i===1 && tab==='signup')));
-    document.getElementById('signin-form').style.display = tab === 'signin' ? 'block' : 'none';
-    document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
-    document.getElementById('signin-error').textContent = '';
-    document.getElementById('signup-error').textContent = '';
-  };
-
-  /* ── NAVIGATION ── */
-  const sections = ['profile','messages','calendar','games','leaderboard'];
-
-  window.navigateTo = function(id) {
-    if (!sections.includes(id)) { showToast('Coming soon!'); return; }
-    sections.forEach(s => document.getElementById('section-'+s).classList.remove('active'));
-    document.getElementById('section-'+id).classList.add('active');
-    document.querySelectorAll('.nav-item').forEach((el,i) => el.classList.toggle('active', sections[i]===id));
-    document.querySelectorAll('.drawer-item').forEach((el,i) => el.classList.toggle('active', i===sections.indexOf(id)));
-    document.getElementById('content').scrollTop = 0;
-  };
-
-  /* ── DRAWER ── */
-  window.toggleDrawer = function() {
-    document.getElementById('drawer').classList.toggle('open');
-    document.getElementById('drawer-overlay').classList.toggle('open');
-  };
-  window.closeDrawer = function() {
-    document.getElementById('drawer').classList.remove('open');
-    document.getElementById('drawer-overlay').classList.remove('open');
-  };
-
-  /* ── MESSAGE TABS ── */
-  window.switchMsgTab = function(btn, tab) {
-    document.querySelectorAll('.msg-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('msg-dms').style.display   = tab==='dms'    ? 'block' : 'none';
-    document.getElementById('msg-groups').style.display = tab==='groups' ? 'block' : 'none';
-  };
-
-  /* ── LEADERBOARD TABS ── */
-  window.switchLbTab = function(btn, tab) {
-    document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('lb-members').style.display = tab==='members' ? 'block' : 'none';
-    document.getElementById('lb-lodges').style.display  = tab==='lodges'  ? 'block' : 'none';
-  };
-
-  /* ── RSVP ── */
-  window.toggleRSVP = function(btn) {
-    const already = btn.classList.contains('rsvpd');
-    btn.classList.toggle('rsvpd');
-    btn.textContent = already ? 'RSVP' : 'Attending ✓';
-    showToast(already ? 'RSVP removed' : 'RSVP confirmed — +10 points!');
-  };
-
-  /* ── CALENDAR ── */
-  function buildCalendar() {
-    const today = new Date();
-    const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
-    const daysInMonth = new Date(today.getFullYear(), today.getMonth()+1, 0).getDate();
-    const eventDays = [7,14,17,22,25,28];
-    const grid = document.getElementById('cal-days');
-    grid.innerHTML = '';
-    for (let i=0;i<firstDay;i++) { const el=document.createElement('div');el.className='cal-day empty';grid.appendChild(el); }
-    for (let d=1;d<=daysInMonth;d++) {
-      const el=document.createElement('div');
-      el.className='cal-day';
-      if (d===today.getDate()) el.classList.add('today');
-      if (eventDays.includes(d)) el.classList.add('has-event');
-      el.textContent=d;
-      el.onclick=()=>showToast('April '+d+(eventDays.includes(d)?' — event scheduled':''));
-      grid.appendChild(el);
-    }
+    await loadProfiles(Object.keys(conversations));
+    renderConversationList();
   }
 
-  /* ── TOAST ── */
-  let toastTimer;
-  window.showToast = function(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
+  async function loadProfiles(ids) {
+    const allIds = [...new Set([...ids, currentUser.id])];
+    const { data } = await sb.from('profiles').select('*').in('id', allIds.length ? allIds : ['none']);
+    allProfiles = data || [];
+  }
+
+  function getProfile(id) {
+    return allProfiles.find(p => p.id === id) || null;
+  }
+
+  function getInitials(name) {
+    if (!name) return '?';
+    return name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  }
+
+  function timeAgo(ts) {
+    const diff = Date.now() - new Date(ts).getTime();
+    const mins = Math.floor(diff/60000);
+    if (mins < 1)  return 'Just now';
+    if (mins < 60) return mins+'m ago';
+    const hrs = Math.floor(mins/60);
+    if (hrs < 24)  return hrs+'h ago';
+    const days = Math.floor(hrs/24);
+    if (days === 1) return 'Yesterday';
+    return days+'d ago';
+  }
+
+  function renderConversationList() {
+    const el = document.getElementById('msg-list-content');
+    const ids = Object.keys(conversations);
+
+    if (ids.length === 0) {
+      el.innerHTML = `<div class="msg-empty"><div class="msg-empty-icon">💬</div>No messages yet.<br>Tap the ✏️ button to<br>start a conversation.</div>`;
+      return;
+    }
+
+    el.innerHTML = ids.map(otherId => {
+      const conv    = conversations[otherId];
+      const profile = getProfile(otherId);
+      const name    = profile?.full_name || 'Brother';
+      const initials= getInitials(name);
+      const preview = conv.lastMsg.content.length > 40 ? conv.lastMsg.content.slice(0,40)+'...' : conv.lastMsg.content;
+      const isMine  = conv.lastMsg.sender_id === currentUser.id;
+      const unread  = conv.unread;
+      return `
+        <div class="msg-row" onclick="openChat('${otherId}','${name.replace(/'/g,"\\'")}','${initials}')">
+          <div class="msg-avatar">${initials}</div>
+          <div class="msg-info">
+            <div class="msg-name">${name}</div>
+            <div class="msg-preview">${isMine?'You: ':''}${preview}</div>
+          </div>
+          <div class="msg-meta">
+            <div class="msg-time">${timeAgo(conv.lastMsg.created_at)}</div>
+            ${unread>0?`<div class="msg-unread">${unread}</div>`:''}
+          </div>
+        </div>`;
+    }).join('');
+
+    const totalUnread = ids.reduce((s,id)=>s+conversations[id].unread,0);
+    const badge = document.getElementById('msg-badge');
+    if (totalUnread > 0) { badge.textContent=totalUnread; badge.classList.add('show'); }
+    else badge.classList.remove('show');
+  }
+
+  /* ══════════════════════════════
+     MESSAGING — OPEN CHAT
+  ══════════════════════════════ */
+  window.openChat = async function(otherId, name, initials) {
+    currentChat = { id: otherId, name, initials };
+    document.getElementById('chat-name').textContent = name;
+    document.getElementById('chat-avatar-initials').textContent = initials;
+    document.getElementById('chat-messages').innerHTML = '<div id="chat-loading">Loading...</div>';
+    document.getElementById('chat-view').classList.add('open');
+    document.getElementById('chat-input').focus();
+
+    await markMessagesRead(otherId);
+    await loadChatMessages(otherId);
   };
 
-  /* ── LISTEN FOR AUTH CHANGES ── */
-  sb.auth.onAuthStateChange((event, session) => {
-    if (event === 'SIGNED_IN' && session) {
-      currentUser = session.user;
-    } else if (event === 'SIGNED_OUT') {
-      currentUser = null;
+  window.closeChat = function() {
+    document.getElementById('chat-view').classList.remove('open');
+    currentChat = null;
+    loadConversations();
+  };
+
+  async function loadChatMessages(otherId) {
+    const { data, error } = await sb
+      .from('messages')
+      .select('*')
+      .or(`and(sender_id.eq.${currentUser.id},recipient_id.eq.${otherId}),and(sender_id.eq.${otherId},recipient_id.eq.${currentUser.id})`)
+      .order('created_at', { ascending: true });
+
+    if (error) { console.error(error); return; }
+    renderChatMessages(data || []);
+  }
+
+  function renderChatMessages(messages) {
+    const el = document.getElementById('chat-messages');
+    if (messages.length === 0) {
+      el.innerHTML = `<div class="msg-empty" style="margin-top:60px;"><div class="msg-empty-icon">🤝</div>Start the conversation,<br>Brother.</div>`;
+      return;
     }
-  });
+
+    let html = '';
+    let lastDate = '';
+    messages.forEach(msg => {
+      const mine = msg.sender_id === currentUser.id;
+      const d    = new Date(msg.created_at);
+      const dateStr = d.toDateString();
+      if (dateStr !== lastDate) {
+        lastDate = dateStr;
+        const label = dateStr===new Date().toDateString() ? 'Today' : d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+        html += `<div class="chat-date-divider">${label}</div>`;
+      }
+      const timeStr = d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      html += `
+        <div class="chat-bubble-wrap ${mine?'mine':'theirs'}">
+          <div>
+            <div class="chat-bubble">${escHtml(msg.content)}</div>
+            <div class="chat-time">${timeStr}</div>
+          </div>
+        </div>`;
+    });
+
+    el.innerHTML = html;
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ══════════════════════════════
+     MESSAGING — SEND
+  ══════════════════════════════ */
+  window.sendMessage = async function() {
+    if (!currentChat || !currentUser) return;
+    const input   = document.getElementById('chat-input');
+    const content = input.value.trim();
+    if (!content) return;
+
+    input.value = '';
+    autoResize(input);
+    document.getElementById('chat-send').disabled = true;
+
+    const { error } = await sb.from('messages').insert({
+      sender_id:    currentUser.id,
+      recipient_id: currentChat.id,
+      content
+    });
+
+    document.getElementById('chat-send').disabled = false;
+
+    if (error) { showToast('Could not send message.'); console.error(error); return; }
+    await loadChatMessages(currentChat.id);
+  };
+
+  window.handleChatKey = function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  };
+
+  window.autoResize = function(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+  };
+
+  async function markMessagesRead(otherId) {
+    await sb.from('messages')
+      .update({ read: true })
+      .eq('sender_id', otherId)
+      .eq('recipient_id', currentUser.id)
+      .eq('read', false);
+  }
+
+  /* ══════════════════════════════
+     REALTIME SUBSCRIPTION
+  ══════════════════════════════ */
+  function subscribeToMessages() {
+    if (realtimeSub) { sb.removeChannel(realtimeSub); }
+    realtimeSub = sb.channel('messages-channel')
+      .on('postgres_changes', {
+        event: 'INSERT', schema: 'public', table: 'messages',
+        filter: `recipient_id=eq.${currentUser.id}`
+      }, async payload => {
+        const msg = payload.new;
+        if (currentChat && msg.sender_id === currentChat.id) {
+          await markMessagesRead(msg.sender_id);
+          await loadChatMessages(currentChat.id);
+        }
+        await loadConversations();
+      })
+      .subscribe();
+  }
+
+  /* ══════════════════════════════
+     MEMBER PICKER (new message)
+  ══════════════════════════════ */
+  window.openMemberPicker = async function() {
+    document.getElementById('member-picker').classList.add('open');
+    const list = document.getElementById('member-picker-list');
+    list.innerHTML = '<div class="member-pick-empty">Loading members...</div>';
+
+    const { data, error } = await sb.from('profiles').select('*').neq('id', currentUser.id);
+    if (error || !data || data.length === 0) {
+      list.innerHTML = '<div class="member-pick-empty">No other members yet.<br>Invite a Brother to join!</div>';
+      return;
+    }
+
+    allProfiles = [...(allProfiles.filter(p=>p.id===currentUser.id)), ...data];
+
+    list.innerHTML = data.map(p => {
+      const name     = p.full_name || 'Brother';
+      const initials = getInitials(name);
+      return `
+        <div class="member-pick-row" onclick="startNewChat('${p.id}','${name.replace(/'/g,"\\'")}','${initials}')">
+          <div class="member-pick-avatar">${initials}</div>
+          <div class="member-pick-name">${name}</div>
+        </div>`;
+    }).join('');
+  };
+
+  window.closeMemberPicker = function(e) {
+    if (e.target === document.getElementById('member-picker')) {
+      document.getElementById('member-picker').classList.remove('open');
+    }
+  };
+
+  window.startNewChat = function(id, name, initials) {
+    document.getElementById('member-picker').classList.remove('open');
+    openChat(id, name, initials);
+  };
+
+  /* ══════════════════════════════
+     AUTH
+  ══════════════════════════════ */
+  window.signIn = async function() {
+    const email    = document.getElementById('signin-email').value.trim();
+    const password = document.getElementById('signin-password').value;
+    const btn      = document.getElementById('signin-btn');
+    const err      = document.getElementById('signin-error');
+    if (!email||!password){err.textContent='Please fill in all fields.';return;}
+    btn.disabled=true; btn.textContent='Signing in...'; err.textContent='';
+    const {data,error} = await sb.auth.signInWithPassword({email,password});
+    if (error){err.textContent='Invalid email or password.';btn.disabled=false;btn.textContent='Enter the Lodge';}
+    else {currentUser=data.user;await showApp();}
+  };
+
+  window.signUp = async function() {
+    const code=document.getElementById('signup-code').value.trim().toUpperCase();
+    const name=document.getElementById('signup-name').value.trim();
+    const email=document.getElementById('signup-email').value.trim();
+    const password=document.getElementById('signup-password').value;
+    const btn=document.getElementById('signup-btn');
+    const err=document.getElementById('signup-error');
+    err.textContent='';
+    if(!code||!name||!email||!password){err.textContent='Please fill in all fields.';return;}
+    if(!VALID_CODES.includes(code)){err.textContent='Invalid invite code. Contact your lodge secretary.';return;}
+    if(password.length<8){err.textContent='Password must be at least 8 characters.';return;}
+    btn.disabled=true;btn.textContent='Creating account...';
+    const {data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name,invite_code:code}}});
+    if(error){err.textContent=error.message;btn.disabled=false;btn.textContent='Request Admission';}
+    else if(data.session){currentUser=data.user;await showApp();showToast('Welcome, Brother '+name.split(' ').pop()+'!');}
+    else{err.style.color='#81C784';err.textContent='Check your email to confirm your account, then sign in.';btn.textContent='Email sent!';}
+  };
+
+  window.signOut = async function() {
+    if(realtimeSub) sb.removeChannel(realtimeSub);
+    await sb.auth.signOut();
+    currentUser=null; currentChat=null;
+    showAuth();
+  };
+
+  window.switchAuthTab = function(tab) {
+    document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='signin')||(i===1&&tab==='signup')));
+    document.getElementById('signin-form').style.display=tab==='signin'?'block':'none';
+    document.getElementById('signup-form').style.display=tab==='signup'?'block':'none';
+    document.getElementById('signin-error').textContent='';
+    document.getElementById('signup-error').textContent='';
+  };
+
+  /* ══════════════════════════════
+     NAVIGATION
+  ══════════════════════════════ */
+  const sections=['profile','messages','calendar','games','leaderboard'];
+
+  window.navigateTo = function(id) {
+    if(!sections.includes(id)){showToast('Coming soon!');return;}
+    sections.forEach(s=>document.getElementById('section-'+s).classList.remove('active'));
+    document.getElementById('section-'+id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach((el,i)=>el.classList.toggle('active',sections[i]===id));
+    document.querySelectorAll('.drawer-item').forEach((el,i)=>el.classList.toggle('active',i===sections.indexOf(id)));
+    document.getElementById('content').scrollTop=0;
+  };
+
+  window.toggleDrawer=function(){document.getElementById('drawer').classList.toggle('open');document.getElementById('drawer-overlay').classList.toggle('open');};
+  window.closeDrawer=function(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawer-overlay').classList.remove('open');};
+  window.switchLbTab=function(btn,tab){document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.getElementById('lb-members').style.display=tab==='members'?'block':'none';document.getElementById('lb-lodges').style.display=tab==='lodges'?'block':'none';};
+  window.toggleRSVP=function(btn){const a=btn.classList.contains('rsvpd');btn.classList.toggle('rsvpd');btn.textContent=a?'RSVP':'Attending ✓';showToast(a?'RSVP removed':'RSVP confirmed — +10 points!');};
+
+  function buildCalendar() {
+    const today=new Date(),firstDay=new Date(today.getFullYear(),today.getMonth(),1).getDay(),daysInMonth=new Date(today.getFullYear(),today.getMonth()+1,0).getDate(),eventDays=[7,14,17,22,25,28],grid=document.getElementById('cal-days');
+    grid.innerHTML='';
+    for(let i=0;i<firstDay;i++){const el=document.createElement('div');el.className='cal-day empty';grid.appendChild(el);}
+    for(let d=1;d<=daysInMonth;d++){const el=document.createElement('div');el.className='cal-day';if(d===today.getDate())el.classList.add('today');if(eventDays.includes(d))el.classList.add('has-event');el.textContent=d;el.onclick=()=>showToast('April '+d+(eventDays.includes(d)?' — event scheduled':''));grid.appendChild(el);}
+  }
+
+  let toastTimer;
+  window.showToast=function(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400);};
+
+  sb.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_IN'&&session){currentUser=session.user;}else if(event==='SIGNED_OUT'){currentUser=null;}});
 
   boot();
-
 })();
 </script>
 </body>
