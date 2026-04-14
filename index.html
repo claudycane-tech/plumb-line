@@ -111,7 +111,7 @@
     .signout-btn{width:100%;padding:13px;background:transparent;border:1px solid rgba(220,80,80,0.4);border-radius:8px;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#E57373;cursor:pointer;margin-top:4px;}
 
     /* MESSAGES */
-    #section-messages{background:var(--off-white);position:relative;}
+    #section-messages{background:var(--off-white);position:relative;min-height:calc(100vh - var(--header-height) - var(--nav-height));}
     .messages-tabs{display:flex;background:var(--white);border-bottom:1px solid var(--border);}
     .msg-tab{flex:1;padding:14px 8px;text-align:center;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;border:none;background:transparent;transition:all 0.2s;}
     .msg-tab.active{color:var(--gold-dark);border-bottom:2px solid var(--gold);}
@@ -126,10 +126,10 @@
     .msg-unread{width:18px;height:18px;border-radius:50%;background:var(--gold);color:var(--black);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;}
     .msg-empty{padding:48px 24px;text-align:center;color:var(--text-muted);font-size:14px;line-height:1.8;}
     .msg-empty-icon{font-size:40px;margin-bottom:12px;}
-    #new-msg-btn{position:absolute;bottom:calc(16px);right:18px;width:52px;height:52px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 16px rgba(201,168,76,0.4);z-index:50;transition:all 0.2s;}
+    #new-msg-btn{position:absolute;bottom:16px;right:18px;width:52px;height:52px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 16px rgba(201,168,76,0.4);z-index:50;}
     #new-msg-btn:active{transform:scale(0.93);}
 
-    /* CHAT VIEW */
+    /* CHAT */
     #chat-view{position:fixed;inset:0;background:var(--off-white);z-index:300;display:none;flex-direction:column;}
     #chat-view.open{display:flex;}
     #chat-header{background:var(--black);padding:0 16px;height:var(--header-height);display:flex;align-items:center;gap:12px;flex-shrink:0;border-bottom:2px solid var(--gold-dark);}
@@ -149,7 +149,7 @@
     #chat-input-wrap{background:var(--white);border-top:1px solid var(--border);padding:10px 14px;display:flex;align-items:flex-end;gap:10px;flex-shrink:0;padding-bottom:max(10px,env(safe-area-inset-bottom));}
     #chat-input{flex:1;background:var(--off-white);border:1px solid var(--border);border-radius:22px;padding:10px 16px;font-size:15px;color:var(--text-primary);outline:none;resize:none;max-height:120px;font-family:inherit;line-height:1.4;}
     #chat-input:focus{border-color:var(--gold);}
-    #chat-send{width:40px;height:40px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:all 0.2s;}
+    #chat-send{width:40px;height:40px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
     #chat-send:active{transform:scale(0.93);}
     #chat-send:disabled{opacity:0.4;}
 
@@ -159,10 +159,10 @@
     #member-picker-sheet{background:var(--white);width:100%;border-radius:20px 20px 0 0;padding:20px 0 36px;max-height:70vh;display:flex;flex-direction:column;}
     #member-picker-title{font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);padding:0 18px 14px;border-bottom:1px solid var(--border);}
     #member-picker-list{overflow-y:auto;flex:1;}
-    .member-pick-row{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--stone);transition:background 0.15s;}
+    .member-pick-row{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;border-bottom:1px solid var(--stone);}
     .member-pick-row:active{background:var(--off-white);}
     .member-pick-avatar{width:40px;height:40px;border-radius:50%;background:var(--stone);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--gold-dark);font-family:Georgia,serif;flex-shrink:0;}
-    .member-pick-name{font-size:15px;font-weight:500;color:var(--text-primary);}
+    .member-pick-name{font-size:15px;font-weight:500;}
     .member-pick-empty{padding:32px 18px;text-align:center;color:var(--text-muted);font-size:14px;}
 
     /* CALENDAR */
@@ -174,7 +174,7 @@
     .cal-day-headers{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px;}
     .cal-day-hdr{text-align:center;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:4px 0;}
     .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
-    .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:13px;color:var(--text-primary);cursor:pointer;position:relative;transition:background 0.15s;}
+    .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:13px;color:var(--text-primary);cursor:pointer;position:relative;}
     .cal-day.empty{pointer-events:none;}
     .cal-day.today{background:var(--gold);color:var(--black);font-weight:700;}
     .cal-day.has-event::after{content:'';position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%;background:var(--gold-dark);}
@@ -182,10 +182,8 @@
     .cal-day.selected{background:var(--stone);border:2px solid var(--gold);}
     .events-list{padding:14px 18px;}
     .events-section-label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
-    .add-event-btn{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);background:transparent;border:1px solid var(--gold);border-radius:999px;padding:4px 12px;cursor:pointer;}
-
-    .event-card{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:14px;margin-bottom:10px;position:relative;}
-    .event-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+    .add-event-btn{font-size:22px;background:var(--gold);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(201,168,76,0.4);}
+    .event-card{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:14px;margin-bottom:10px;}
     .event-type-pill{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid;margin-bottom:6px;display:inline-block;}
     .pill-meeting{color:#5B8C5A;border-color:#5B8C5A;background:rgba(91,140,90,0.08);}
     .pill-degree{color:#5A6B8C;border-color:#5A6B8C;background:rgba(90,107,140,0.08);}
@@ -196,52 +194,105 @@
     .event-title{font-size:15px;font-weight:600;color:var(--text-primary);font-family:Georgia,serif;margin-bottom:6px;}
     .event-meta-row{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);margin-bottom:3px;}
     .event-actions{display:flex;align-items:center;gap:10px;margin-top:12px;}
-    .rsvp-btn{padding:7px 18px;border-radius:999px;border:1px solid var(--gold);background:transparent;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);cursor:pointer;transition:all 0.2s;}
+    .rsvp-btn{padding:7px 18px;border-radius:999px;border:1px solid var(--gold);background:transparent;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-dark);cursor:pointer;}
     .rsvp-btn.rsvpd{background:var(--gold);color:var(--black);font-weight:600;}
     .event-pts{font-size:11px;color:var(--text-muted);}
     .event-empty{padding:32px 18px;text-align:center;color:var(--text-muted);font-size:14px;line-height:1.8;}
     .event-empty-icon{font-size:36px;margin-bottom:10px;}
 
-    /* ADD EVENT SHEET */
+    /* ADD EVENT */
     #add-event-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:400;display:none;align-items:flex-end;}
     #add-event-overlay.open{display:flex;}
     #add-event-sheet{background:var(--white);width:100%;border-radius:20px 20px 0 0;padding:24px 20px 40px;max-height:90vh;overflow-y:auto;}
-    .sheet-title{font-size:16px;font-weight:600;font-family:Georgia,serif;color:var(--text-primary);margin-bottom:20px;}
+    .sheet-title{font-size:16px;font-weight:600;font-family:Georgia,serif;margin-bottom:20px;}
     .form-field{margin-bottom:16px;}
     .form-label{display:block;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
     .form-input{width:100%;padding:11px 14px;background:var(--off-white);border:1px solid var(--border);border-radius:8px;font-size:15px;color:var(--text-primary);outline:none;font-family:inherit;transition:border 0.2s;}
     .form-input:focus{border-color:var(--gold);}
     .form-select{width:100%;padding:11px 14px;background:var(--off-white);border:1px solid var(--border);border-radius:8px;font-size:15px;color:var(--text-primary);outline:none;font-family:inherit;appearance:none;}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .submit-btn{width:100%;padding:14px;background:var(--gold);border:none;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--black);cursor:pointer;margin-top:8px;transition:all 0.2s;}
-    .submit-btn:active{transform:scale(0.98);}
+    .submit-btn{width:100%;padding:14px;background:var(--gold);border:none;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--black);cursor:pointer;margin-top:8px;}
     .submit-btn:disabled{opacity:0.5;}
     .cancel-btn{width:100%;padding:12px;background:transparent;border:1px solid var(--border);border-radius:8px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);cursor:pointer;margin-top:8px;}
 
-    /* GAMES */
-    #section-games{background:var(--off-white);padding:18px;}
+    /* ═══════════════════════════
+       GAMES LOBBY
+    ═══════════════════════════ */
+    #section-games{background:var(--off-white);}
+    .games-lobby{padding:18px;}
     .games-header{text-align:center;padding:10px 0 20px;}
     .games-header-title{font-size:20px;font-weight:600;font-family:Georgia,serif;}
     .games-header-sub{font-size:11px;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:4px;}
-    .games-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+    .games-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;}
     .game-card{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;text-align:center;transition:all 0.2s;}
     .game-card:active{transform:scale(0.97);border-color:var(--gold);}
+    .game-card.featured{border-color:rgba(201,168,76,0.5);}
     .game-icon{font-size:36px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;background:var(--stone);border-radius:14px;border:1px solid var(--border);}
     .game-card.featured .game-icon{background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.4);}
     .game-name{font-size:14px;font-weight:600;font-family:Georgia,serif;}
     .game-desc{font-size:11px;color:var(--text-muted);line-height:1.5;}
     .game-pts{font-size:10px;color:var(--gold-dark);letter-spacing:0.1em;text-transform:uppercase;}
-    .leaderboard-strip{background:var(--black);border-radius:12px;padding:16px;margin-top:14px;}
-    .lb-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-    .lb-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
-    .lb-row:last-child{border-bottom:none;}
-    .lb-rank{font-size:13px;font-weight:700;color:var(--gold);width:20px;font-family:Georgia,serif;}
-    .lb-name{flex:1;font-size:13px;color:var(--white);}
-    .lb-pts{font-size:12px;color:var(--gold);font-weight:600;}
+    .game-scores-strip{background:var(--black);border-radius:12px;padding:16px;margin-bottom:16px;}
+    .gs-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+    .gs-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .gs-row:last-child{border-bottom:none;}
+    .gs-rank{font-size:13px;font-weight:700;color:var(--gold);width:20px;font-family:Georgia,serif;}
+    .gs-name{flex:1;font-size:13px;color:var(--white);}
+    .gs-score{font-size:12px;color:var(--gold);font-weight:600;}
+
+    /* ═══════════════════════════
+       TRIVIA GAME
+    ═══════════════════════════ */
+    #trivia-view{position:fixed;inset:0;background:var(--black);z-index:300;display:none;flex-direction:column;}
+    #trivia-view.open{display:flex;}
+    #trivia-header{padding:0 16px;height:var(--header-height);display:flex;align-items:center;gap:12px;flex-shrink:0;border-bottom:1px solid rgba(201,168,76,0.2);}
+    #trivia-back{background:transparent;border:none;color:var(--gold);font-size:22px;cursor:pointer;padding:8px 4px;}
+    #trivia-header-title{flex:1;font-size:16px;font-weight:600;color:var(--white);font-family:Georgia,serif;}
+    #trivia-score-display{font-size:13px;color:var(--gold);font-weight:600;}
+
+    #trivia-body{flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;}
+
+    /* Progress bar */
+    #trivia-progress-wrap{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:4px;margin-bottom:24px;flex-shrink:0;}
+    #trivia-progress-bar{height:100%;background:var(--gold);border-radius:4px;transition:width 0.4s ease;}
+
+    /* Question */
+    #trivia-q-num{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;}
+    #trivia-question{font-size:19px;font-weight:600;color:var(--white);font-family:Georgia,serif;line-height:1.45;margin-bottom:28px;flex-shrink:0;}
+    #trivia-symbol{font-size:48px;text-align:center;margin-bottom:16px;display:none;}
+
+    /* Answer options */
+    #trivia-options{display:flex;flex-direction:column;gap:10px;flex:1;}
+    .trivia-opt{width:100%;padding:15px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;font-size:15px;color:var(--white);cursor:pointer;text-align:left;transition:all 0.2s;font-family:inherit;line-height:1.4;}
+    .trivia-opt:active{transform:scale(0.98);}
+    .trivia-opt.correct{background:rgba(91,140,90,0.25);border-color:#5B8C5A;color:#9ED19C;}
+    .trivia-opt.wrong{background:rgba(220,80,80,0.2);border-color:#E57373;color:#E57373;}
+    .trivia-opt.reveal{background:rgba(91,140,90,0.15);border-color:rgba(91,140,90,0.4);color:rgba(255,255,255,0.5);}
+    .trivia-opt:disabled{cursor:default;}
+
+    /* Feedback */
+    #trivia-feedback{margin-top:18px;padding:14px 16px;border-radius:10px;font-size:14px;line-height:1.6;display:none;flex-shrink:0;}
+    #trivia-feedback.correct{background:rgba(91,140,90,0.2);border:1px solid rgba(91,140,90,0.4);color:#9ED19C;}
+    #trivia-feedback.wrong{background:rgba(220,80,80,0.15);border:1px solid rgba(220,80,80,0.3);color:#EF9A9A;}
+    #trivia-next-btn{width:100%;padding:14px;background:var(--gold);border:none;border-radius:10px;font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--black);cursor:pointer;margin-top:14px;display:none;flex-shrink:0;}
+
+    /* Results */
+    #trivia-results{position:fixed;inset:0;background:var(--black);z-index:301;display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;}
+    #trivia-results.open{display:flex;}
+    .results-symbol{font-size:60px;margin-bottom:16px;}
+    .results-title{font-size:26px;font-weight:600;color:var(--white);font-family:Georgia,serif;margin-bottom:8px;}
+    .results-subtitle{font-size:13px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:32px;}
+    .results-score-circle{width:120px;height:120px;border-radius:50%;border:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 32px;}
+    .results-score-num{font-size:36px;font-weight:700;color:var(--gold);font-family:Georgia,serif;}
+    .results-score-label{font-size:10px;color:var(--text-muted);letter-spacing:0.15em;text-transform:uppercase;}
+    .results-pts{font-size:16px;color:var(--gold-light);margin-bottom:8px;}
+    .results-correct{font-size:13px;color:var(--text-muted);margin-bottom:32px;}
+    .results-btn{width:100%;padding:14px;background:var(--gold);border:none;border-radius:10px;font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--black);cursor:pointer;margin-bottom:10px;}
+    .results-btn-sec{width:100%;padding:13px;background:transparent;border:1px solid rgba(201,168,76,0.4);border-radius:10px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);cursor:pointer;}
 
     /* LEADERBOARD */
     #section-leaderboard{background:var(--off-white);padding:18px;}
-    .section-page-header{padding:18px 18px 14px;background:var(--white);border-bottom:1px solid var(--border);}
+    .section-page-header{padding:18px 18px 14px;background:var(--white);border-bottom:1px solid var(--border);margin:-18px -18px 18px;}
     .section-page-title{font-size:22px;font-weight:600;font-family:Georgia,serif;}
     .section-page-sub{font-size:11px;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px;}
     .lb-tabs{display:flex;gap:8px;margin-bottom:16px;}
@@ -267,7 +318,7 @@
     .nav-badge.show{opacity:1;}
 
     /* TOAST */
-    #toast{position:fixed;bottom:calc(var(--nav-height)+16px);left:50%;transform:translateX(-50%) translateY(20px);background:var(--off-black);color:var(--gold-light);padding:10px 20px;border-radius:999px;font-size:13px;letter-spacing:0.05em;border:1px solid var(--gold-dark);opacity:0;transition:all 0.3s ease;z-index:500;white-space:nowrap;}
+    #toast{position:fixed;bottom:calc(var(--nav-height)+16px);left:50%;transform:translateX(-50%) translateY(20px);background:var(--off-black);color:var(--gold-light);padding:10px 20px;border-radius:999px;font-size:13px;letter-spacing:0.05em;border:1px solid var(--gold-dark);opacity:0;transition:all 0.3s ease;z-index:600;white-space:nowrap;}
     #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   </style>
 </head>
@@ -278,8 +329,7 @@
 <div id="auth-screen" class="hidden">
   <div class="auth-logo">
     <span class="the">The</span><span class="name">Plumb Line</span>
-    <span class="symbol">⧖</span>
-    <span class="tagline">For the Craft &amp; Its Brotherhood</span>
+    <span class="symbol">⧖</span><span class="tagline">For the Craft &amp; Its Brotherhood</span>
   </div>
   <div class="auth-card">
     <div class="auth-tabs">
@@ -324,7 +374,7 @@
       <div class="drawer-divider"></div>
       <button class="drawer-item" onclick="signOut();closeDrawer()"><div class="drawer-item-icon">🚪</div><span class="drawer-item-label" style="color:#E57373">Sign Out</span></button>
     </div>
-    <div id="drawer-footer"><div id="drawer-footer-version">The Plumb Line · v0.4 · Stage 4</div></div>
+    <div id="drawer-footer"><div id="drawer-footer-version">The Plumb Line · v0.5 · Stage 5</div></div>
   </div>
 
   <div id="content">
@@ -343,7 +393,7 @@
           <div class="profile-stat"><div class="profile-stat-num" id="stat-points">0</div><div class="profile-stat-label">Points</div></div>
           <div class="profile-stat"><div class="profile-stat-num">0</div><div class="profile-stat-label">Lodges</div></div>
           <div class="profile-stat"><div class="profile-stat-num" id="stat-events">0</div><div class="profile-stat-label">Events</div></div>
-          <div class="profile-stat"><div class="profile-stat-num">—</div><div class="profile-stat-label">Rank</div></div>
+          <div class="profile-stat"><div class="profile-stat-num" id="stat-games">0</div><div class="profile-stat-label">Games</div></div>
         </div>
       </div>
       <div class="profile-body">
@@ -361,10 +411,10 @@
             <div class="trophy-grid">
               <div class="trophy-item earned"><div class="trophy-emoji">🏅</div><div class="trophy-label">First Login</div></div>
               <div class="trophy-item" id="trophy-events"><div class="trophy-emoji" style="opacity:0.2">📅</div><div class="trophy-label">10 Events</div></div>
+              <div class="trophy-item" id="trophy-trivia"><div class="trophy-emoji" style="opacity:0.2">🎯</div><div class="trophy-label">Trivia Pro</div></div>
+              <div class="trophy-item" id="trophy-perfect"><div class="trophy-emoji" style="opacity:0.2">🔺</div><div class="trophy-label">Perfect Round</div></div>
               <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🤝</div><div class="trophy-label">Brotherly</div></div>
               <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">⭐</div><div class="trophy-label">Multi-Lodge</div></div>
-              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🎯</div><div class="trophy-label">Trivia Pro</div></div>
-              <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🔑</div><div class="trophy-label">Officer</div></div>
               <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🏆</div><div class="trophy-label">Top 5</div></div>
               <div class="trophy-item"><div class="trophy-emoji" style="opacity:0.2">🕯️</div><div class="trophy-label">50 Events</div></div>
             </div>
@@ -377,7 +427,7 @@
     <div id="section-messages" class="section" style="position:relative;min-height:calc(100vh - var(--header-height) - var(--nav-height));">
       <div class="messages-tabs">
         <button class="msg-tab active">Direct Messages</button>
-        <button class="msg-tab" onclick="showToast('Group chats coming in Stage 5')">Group Chats</button>
+        <button class="msg-tab" onclick="showToast('Group chats coming soon')">Group Chats</button>
       </div>
       <div id="msg-list-content"></div>
       <button id="new-msg-btn" onclick="openMemberPicker()">✏️</button>
@@ -391,15 +441,13 @@
         <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
       </div>
       <div class="cal-grid-wrap">
-        <div class="cal-day-headers">
-          <div class="cal-day-hdr">Su</div><div class="cal-day-hdr">Mo</div><div class="cal-day-hdr">Tu</div><div class="cal-day-hdr">We</div><div class="cal-day-hdr">Th</div><div class="cal-day-hdr">Fr</div><div class="cal-day-hdr">Sa</div>
-        </div>
+        <div class="cal-day-headers"><div class="cal-day-hdr">Su</div><div class="cal-day-hdr">Mo</div><div class="cal-day-hdr">Tu</div><div class="cal-day-hdr">We</div><div class="cal-day-hdr">Th</div><div class="cal-day-hdr">Fr</div><div class="cal-day-hdr">Sa</div></div>
         <div class="cal-days" id="cal-days"></div>
       </div>
       <div class="events-list">
         <div class="events-section-label">
           <span id="events-label">Upcoming Events</span>
-          <button class="add-event-btn" onclick="openAddEvent()">+ Add Event</button>
+          <button class="add-event-btn" onclick="openAddEvent()" title="Add Event">+</button>
         </div>
         <div id="events-container"></div>
       </div>
@@ -407,44 +455,72 @@
 
     <!-- GAMES -->
     <div id="section-games" class="section">
-      <div class="games-header"><div class="games-header-title">Games Lobby</div><div class="games-header-sub">Earn points for your lodge</div></div>
-      <div class="games-grid">
-        <div class="game-card featured" onclick="showToast('Masonic Trivia launching soon!')"><div class="game-icon">🔺</div><div class="game-name">Masonic Trivia</div><div class="game-desc">Test your knowledge of ritual, history & symbolism</div><div class="game-pts">+50 pts per win</div></div>
-        <div class="game-card" onclick="showToast('Word of the Day coming soon!')"><div class="game-icon">📜</div><div class="game-name">Word of the Day</div><div class="game-desc">Daily Masonic vocabulary challenge</div><div class="game-pts">+15 pts daily</div></div>
-        <div class="game-card" onclick="showToast('Symbol Match coming soon!')"><div class="game-icon">🔵</div><div class="game-name">Symbol Match</div><div class="game-desc">Match Masonic symbols to their meaning</div><div class="game-pts">+25 pts per round</div></div>
-        <div class="game-card" onclick="showToast('Opening Masonic Minute...')"><div class="game-icon">🧘</div><div class="game-name">Masonic Minute</div><div class="game-desc">A moment of reflection and calm</div><div class="game-pts">+10 pts daily</div></div>
-        <div class="game-card" onclick="showToast('Cipher Challenge coming soon!')"><div class="game-icon">🔐</div><div class="game-name">Cipher Challenge</div><div class="game-desc">Decode Masonic ciphers and symbols</div><div class="game-pts">+35 pts per win</div></div>
-        <div class="game-card" onclick="showToast('Card games coming soon!')"><div class="game-icon">🃏</div><div class="game-name">Card Games</div><div class="game-desc">Classic card games with lodge scoring</div><div class="game-pts">+20 pts per win</div></div>
-      </div>
-      <div class="leaderboard-strip">
-        <div class="lb-title">Top Players This Week</div>
-        <div class="lb-row"><div class="lb-rank">1</div><div class="lb-name">Bro. Thomas Mitchell</div><div class="lb-pts">2,840 pts</div></div>
-        <div class="lb-row"><div class="lb-rank">2</div><div class="lb-name">Bro. Edward Lawson</div><div class="lb-pts">2,310 pts</div></div>
-        <div class="lb-row"><div class="lb-rank">3</div><div class="lb-name" id="lb-strip-name">You</div><div class="lb-pts" id="lb-strip-pts">0 pts</div></div>
+      <div class="games-lobby">
+        <div class="games-header"><div class="games-header-title">Games Lobby</div><div class="games-header-sub">Earn points for your lodge</div></div>
+        <div class="games-grid">
+          <div class="game-card featured" onclick="startTrivia()">
+            <div class="game-icon">🔺</div>
+            <div class="game-name">Masonic Trivia</div>
+            <div class="game-desc">Test your knowledge of ritual, history &amp; symbolism</div>
+            <div class="game-pts">+50 pts per win</div>
+          </div>
+          <div class="game-card" onclick="showToast('Word of the Day coming soon!')">
+            <div class="game-icon">📜</div>
+            <div class="game-name">Word of the Day</div>
+            <div class="game-desc">Daily Masonic vocabulary challenge</div>
+            <div class="game-pts">+15 pts daily</div>
+          </div>
+          <div class="game-card" onclick="showToast('Symbol Match coming soon!')">
+            <div class="game-icon">🔵</div>
+            <div class="game-name">Symbol Match</div>
+            <div class="game-desc">Match Masonic symbols to their meaning</div>
+            <div class="game-pts">+25 pts per round</div>
+          </div>
+          <div class="game-card" onclick="showToast('Opening Masonic Minute...')">
+            <div class="game-icon">🧘</div>
+            <div class="game-name">Masonic Minute</div>
+            <div class="game-desc">A moment of reflection and calm</div>
+            <div class="game-pts">+10 pts daily</div>
+          </div>
+          <div class="game-card" onclick="showToast('Cipher Challenge coming soon!')">
+            <div class="game-icon">🔐</div>
+            <div class="game-name">Cipher Challenge</div>
+            <div class="game-desc">Decode Masonic ciphers and symbols</div>
+            <div class="game-pts">+35 pts per win</div>
+          </div>
+          <div class="game-card" onclick="showToast('Card games coming soon!')">
+            <div class="game-icon">🃏</div>
+            <div class="game-name">Card Games</div>
+            <div class="game-desc">Classic card games with lodge scoring</div>
+            <div class="game-pts">+20 pts per win</div>
+          </div>
+        </div>
+        <div class="game-scores-strip">
+          <div class="gs-title">Trivia Leaderboard</div>
+          <div id="trivia-lb-rows"><div class="gs-row"><div class="gs-name" style="color:var(--text-muted);">Play a game to appear here</div></div></div>
+        </div>
       </div>
     </div>
 
     <!-- LEADERBOARD -->
     <div id="section-leaderboard" class="section">
       <div class="section-page-header"><div class="section-page-title">Leaderboard</div><div class="section-page-sub" id="lb-month-label">April 2026</div></div>
-      <div style="padding:18px;">
-        <div class="lb-tabs">
-          <button class="lb-tab active" onclick="switchLbTab(this,'members')">Members</button>
-          <button class="lb-tab" onclick="switchLbTab(this,'lodges')">Lodges</button>
-        </div>
-        <div id="lb-members">
-          <div class="lb-full-row"><div class="lb-full-rank">1</div><div class="lb-full-avatar">TM</div><div class="lb-full-info"><div class="lb-full-name">W.M. Thomas Mitchell</div><div class="lb-full-org">Harmony Lodge No. 12</div></div><div class="lb-full-pts">2,840</div></div>
-          <div class="lb-full-row"><div class="lb-full-rank">2</div><div class="lb-full-avatar">EL</div><div class="lb-full-info"><div class="lb-full-name">Bro. Edward Lawson</div><div class="lb-full-org">Scottish Rite Valley</div></div><div class="lb-full-pts">2,310</div></div>
-          <div class="lb-full-row" style="border:2px solid var(--gold);"><div class="lb-full-rank">—</div><div class="lb-full-avatar" id="lb-my-avatar" style="border-color:var(--gold);">?</div><div class="lb-full-info"><div class="lb-full-name" id="lb-my-name">You</div><div class="lb-full-org">New member</div></div><div class="lb-full-pts" id="lb-my-pts">0</div></div>
-        </div>
-        <div id="lb-lodges" style="display:none">
-          <div class="lb-full-row"><div class="lb-full-rank">1</div><div class="lb-full-avatar" style="border-radius:10px;font-size:20px;">🏛️</div><div class="lb-full-info"><div class="lb-full-name">Harmony Lodge No. 12</div><div class="lb-full-org">Blue Lodge · 42 members</div></div><div class="lb-full-pts">14,200</div></div>
-          <div class="lb-full-row"><div class="lb-full-rank">2</div><div class="lb-full-avatar" style="border-radius:10px;font-size:20px;">⭐</div><div class="lb-full-info"><div class="lb-full-name">Scottish Rite Valley</div><div class="lb-full-org">Scottish Rite · 68 members</div></div><div class="lb-full-pts">11,840</div></div>
-        </div>
+      <div class="lb-tabs">
+        <button class="lb-tab active" onclick="switchLbTab(this,'members')">Members</button>
+        <button class="lb-tab" onclick="switchLbTab(this,'lodges')">Lodges</button>
+      </div>
+      <div id="lb-members">
+        <div class="lb-full-row"><div class="lb-full-rank">1</div><div class="lb-full-avatar">TM</div><div class="lb-full-info"><div class="lb-full-name">W.M. Thomas Mitchell</div><div class="lb-full-org">Harmony Lodge No. 12</div></div><div class="lb-full-pts">2,840</div></div>
+        <div class="lb-full-row"><div class="lb-full-rank">2</div><div class="lb-full-avatar">EL</div><div class="lb-full-info"><div class="lb-full-name">Bro. Edward Lawson</div><div class="lb-full-org">Scottish Rite Valley</div></div><div class="lb-full-pts">2,310</div></div>
+        <div class="lb-full-row" style="border:2px solid var(--gold);"><div class="lb-full-rank">—</div><div class="lb-full-avatar" id="lb-my-avatar" style="border-color:var(--gold);">?</div><div class="lb-full-info"><div class="lb-full-name" id="lb-my-name">You</div><div class="lb-full-org">New member</div></div><div class="lb-full-pts" id="lb-my-pts">0</div></div>
+      </div>
+      <div id="lb-lodges" style="display:none">
+        <div class="lb-full-row"><div class="lb-full-rank">1</div><div class="lb-full-avatar" style="border-radius:10px;font-size:20px;">🏛️</div><div class="lb-full-info"><div class="lb-full-name">Harmony Lodge No. 12</div><div class="lb-full-org">Blue Lodge · 42 members</div></div><div class="lb-full-pts">14,200</div></div>
+        <div class="lb-full-row"><div class="lb-full-rank">2</div><div class="lb-full-avatar" style="border-radius:10px;font-size:20px;">⭐</div><div class="lb-full-info"><div class="lb-full-name">Scottish Rite Valley</div><div class="lb-full-org">Scottish Rite · 68 members</div></div><div class="lb-full-pts">11,840</div></div>
       </div>
     </div>
 
-  </div>
+  </div><!-- end content -->
 
   <div id="bottom-nav">
     <button class="nav-item active" onclick="navigateTo('profile')"><div class="nav-icon">👤</div><div class="nav-dot"></div><div class="nav-label">Profile</div></button>
@@ -455,7 +531,7 @@
   </div>
 </div>
 
-<!-- CHAT VIEW -->
+<!-- CHAT -->
 <div id="chat-view">
   <div id="chat-header">
     <button id="chat-back" onclick="closeChat()">‹</button>
@@ -477,7 +553,7 @@
   </div>
 </div>
 
-<!-- ADD EVENT SHEET -->
+<!-- ADD EVENT -->
 <div id="add-event-overlay" onclick="closeAddEventOutside(event)">
   <div id="add-event-sheet">
     <div class="sheet-title">Add New Event</div>
@@ -496,12 +572,45 @@
       <div class="form-field"><label class="form-label">Date</label><input class="form-input" id="ev-date" type="date"/></div>
       <div class="form-field"><label class="form-label">Time</label><input class="form-input" id="ev-time" type="time"/></div>
     </div>
-    <div class="form-field"><label class="form-label">Location (optional)</label><input class="form-input" id="ev-location" type="text" placeholder="e.g. Masonic Temple, 123 Main St"/></div>
-    <div class="form-field"><label class="form-label">Description (optional)</label><textarea class="form-input" id="ev-desc" rows="3" placeholder="Details about the event..." style="resize:none;"></textarea></div>
-    <div class="form-field"><label class="form-label">Points Awarded for Attending</label><input class="form-input" id="ev-points" type="number" value="10" min="0" max="100"/></div>
+    <div class="form-field"><label class="form-label">Location (optional)</label><input class="form-input" id="ev-location" type="text" placeholder="e.g. Masonic Temple"/></div>
+    <div class="form-field"><label class="form-label">Description (optional)</label><textarea class="form-input" id="ev-desc" rows="3" style="resize:none;"></textarea></div>
+    <div class="form-field"><label class="form-label">Points for Attending</label><input class="form-input" id="ev-points" type="number" value="10" min="0" max="100"/></div>
     <button class="submit-btn" id="ev-submit-btn" onclick="submitEvent()">Post Event</button>
     <button class="cancel-btn" onclick="closeAddEvent()">Cancel</button>
   </div>
+</div>
+
+<!-- TRIVIA GAME -->
+<div id="trivia-view">
+  <div id="trivia-header">
+    <button id="trivia-back" onclick="closeTriviaConfirm()">‹</button>
+    <div id="trivia-header-title">Masonic Trivia</div>
+    <div id="trivia-score-display">0 pts</div>
+  </div>
+  <div id="trivia-body">
+    <div id="trivia-progress-wrap"><div id="trivia-progress-bar" style="width:0%"></div></div>
+    <div id="trivia-q-num">Question 1 of 10</div>
+    <div id="trivia-symbol"></div>
+    <div id="trivia-question"></div>
+    <div id="trivia-options"></div>
+    <div id="trivia-feedback"></div>
+    <button id="trivia-next-btn" onclick="nextQuestion()"></button>
+  </div>
+</div>
+
+<!-- TRIVIA RESULTS -->
+<div id="trivia-results">
+  <div class="results-symbol" id="results-symbol">🏅</div>
+  <div class="results-title" id="results-title">Well done, Brother!</div>
+  <div class="results-subtitle" id="results-subtitle">Round Complete</div>
+  <div class="results-score-circle">
+    <div class="results-score-num" id="results-score">0</div>
+    <div class="results-score-label">Points</div>
+  </div>
+  <div class="results-pts" id="results-pts">+0 pts added to your profile</div>
+  <div class="results-correct" id="results-correct">0 of 10 correct</div>
+  <button class="results-btn" onclick="restartTrivia()">Play Again</button>
+  <button class="results-btn-sec" onclick="closeTrivia()">Back to Lobby</button>
 </div>
 
 <div id="toast"></div>
@@ -509,51 +618,44 @@
 <script>
 (function(){
 
-  const SUPABASE_URL = 'https://tbzqkbnjmuftxupnwnqw.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_DKJiq9QnFoJlgglOJBZRYQ_n58Uq2J1';
-  const VALID_CODES  = ['HIRAM2026','SOLOMONS','PLUMBLINE','CRAFTSMAN'];
-  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const SUPABASE_URL='https://tbzqkbnjmuftxupnwnqw.supabase.co';
+  const SUPABASE_KEY='sb_publishable_DKJiq9QnFoJlgglOJBZRYQ_n58Uq2J1';
+  const VALID_CODES=['HIRAM2026','SOLOMONS','PLUMBLINE','CRAFTSMAN'];
+  const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-  let currentUser   = null;
-  let currentChat   = null;
-  let realtimeSub   = null;
-  let allProfiles   = [];
-  let conversations = {};
-  let userPoints    = 0;
-  let userEventCount= 0;
-  let myRsvpIds     = new Set();
+  let currentUser=null,currentChat=null,realtimeSub=null;
+  let allProfiles=[],conversations={};
+  let userPoints=0,userEventCount=0,userGameCount=0;
+  let myRsvpIds=new Set();
+  let allEvents=[];
+  const today=new Date();
+  let calYear=today.getFullYear(),calMonth=today.getMonth();
 
-  // Calendar state
-  const today = new Date();
-  let calYear  = today.getFullYear();
-  let calMonth = today.getMonth();
-  let allEvents = [];
-
-  /* ── BOOT ── */
-  async function boot() {
-    const { data:{session} } = await sb.auth.getSession();
-    if (session) { currentUser=session.user; await showApp(); }
+  /* ══ BOOT ══ */
+  async function boot(){
+    const{data:{session}}=await sb.auth.getSession();
+    if(session){currentUser=session.user;await showApp();}
     else showAuth();
     document.getElementById('loading-screen').classList.add('hidden');
   }
 
-  async function showApp() {
+  async function showApp(){
     document.getElementById('auth-screen').classList.add('hidden');
     document.getElementById('app').style.display='flex';
     populateProfile();
-    await Promise.all([loadConversations(), loadEvents(), loadMyRsvps()]);
+    await Promise.all([loadConversations(),loadEvents(),loadMyRsvps(),loadTriviaLeaderboard()]);
     subscribeToMessages();
     updateLbMonth();
   }
 
-  function showAuth() {
+  function showAuth(){
     document.getElementById('auth-screen').classList.remove('hidden');
     document.getElementById('app').style.display='none';
   }
 
-  /* ── PROFILE ── */
-  function populateProfile() {
-    if(!currentUser) return;
+  /* ══ PROFILE ══ */
+  function populateProfile(){
+    if(!currentUser)return;
     const meta=currentUser.user_metadata||{};
     const name=meta.full_name||currentUser.email.split('@')[0];
     const initials=name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
@@ -564,7 +666,6 @@
     document.getElementById('drawer-user-lodge').textContent='Member · The Plumb Line';
     document.getElementById('lb-my-name').textContent=name;
     document.getElementById('lb-my-avatar').textContent=initials;
-    document.getElementById('lb-strip-name').textContent=name;
     const saved=localStorage.getItem('pl_avatar_'+currentUser.id);
     if(saved){document.getElementById('avatar-img').src=saved;document.getElementById('avatar-img').style.display='block';document.getElementById('avatar-initials').style.display='none';}
   }
@@ -583,73 +684,219 @@
     reader.readAsDataURL(file);
   };
 
-  function updateProfileStats() {
+  function updateProfileStats(){
     document.getElementById('stat-points').textContent=userPoints.toLocaleString();
     document.getElementById('stat-events').textContent=userEventCount;
+    document.getElementById('stat-games').textContent=userGameCount;
     document.getElementById('lb-my-pts').textContent=userPoints.toLocaleString();
-    document.getElementById('lb-strip-pts').textContent=userPoints.toLocaleString()+' pts';
-    if(userEventCount>=10){
-      const t=document.getElementById('trophy-events');
+    let trophies=1;
+    if(userEventCount>=10){unlockTrophy('trophy-events');trophies++;}
+    if(userGameCount>=5){unlockTrophy('trophy-trivia');trophies++;}
+    document.getElementById('trophy-count').textContent=trophies+' of 24 earned';
+  }
+
+  function unlockTrophy(id){
+    const t=document.getElementById(id);
+    if(t&&!t.classList.contains('earned')){
       t.classList.add('earned');
       t.querySelector('.trophy-emoji').style.opacity='1';
-      document.getElementById('trophy-count').textContent='2 of 24 earned';
     }
   }
 
   /* ══════════════════════════════
-     CALENDAR — EVENTS
+     TRIVIA GAME
   ══════════════════════════════ */
-  async function loadEvents() {
-    const { data, error } = await sb.from('events').select('*').order('starts_at',{ascending:true});
-    if(error){console.error(error);return;}
-    allEvents = data||[];
-    renderCalendar();
-    renderEvents();
+  const QUESTIONS=[
+    {q:"What tool do Masons use as a symbol of equality among all members?",opts:["The Plumb","The Level","The Square","The Compasses"],a:1,exp:"The Level teaches that we are all born equal and meet on the level — a fundamental principle of Freemasonry."},
+    {q:"In Freemasonry, what does the letter 'G' in the center of the Square and Compasses symbolize?",opts:["Geometry and God","Grand Lodge","Growth and Goodness","The letter G has no meaning"],a:0,exp:"The 'G' stands for both Geometry — the foremost science of the ancient Craft — and the Grand Geometrician of the Universe, a reference to the Supreme Being."},
+    {q:"What is the first degree of Freemasonry called?",opts:["Fellow Craft","Master Mason","Entered Apprentice","Royal Arch"],a:2,exp:"The Entered Apprentice is the first degree, representing birth and the beginning of a man's Masonic journey."},
+    {q:"What landmark structure is central to Masonic symbolism and ritual?",opts:["The Great Pyramid","King Solomon's Temple","The Parthenon","Notre Dame Cathedral"],a:1,exp:"King Solomon's Temple in Jerusalem is the central allegorical setting of Masonic ritual, representing the construction of a spiritual temple within ourselves."},
+    {q:"Who was the legendary chief architect of King Solomon's Temple in Masonic tradition?",opts:["Solomon","Hiram King of Tyre","Hiram Abiff","Jacques de Molay"],a:2,exp:"Hiram Abiff is the central figure of the Master Mason degree — a skilled craftsman whose story teaches lessons about integrity, fidelity, and mortality."},
+    {q:"What does the Rough Ashlar represent in Masonic symbolism?",opts:["A perfect man","A man in his natural state before Masonic education","The cornerstone of the temple","A polished stone"],a:1,exp:"The Rough Ashlar represents a man in his rough natural state. Through the work of Masonry, he is shaped into a Perfect Ashlar — a man of moral refinement."},
+    {q:"What are the three degrees of Craft Masonry?",opts:["Apprentice, Journeyman, Master","Entered Apprentice, Fellow Craft, Master Mason","Initiate, Passed, Raised","Blue, Red, Gold"],a:1,exp:"The three degrees of the Blue Lodge are Entered Apprentice, Fellow Craft, and Master Mason — representing youth, manhood, and age; or birth, life, and death."},
+    {q:"What is the Volume of the Sacred Law in Freemasonry?",opts:["The Masonic Bible","Whichever holy book is sacred to the members present","The Scottish Rite ritual book","The Grand Lodge constitution"],a:1,exp:"The Volume of the Sacred Law is whichever scripture is deemed holy by the members present. In lodges with members of different faiths, multiple volumes may be present."},
+    {q:"What do the two pillars at the porch of King Solomon's Temple represent?",opts:["Strength and Beauty","Boaz and Jachin","East and West","The sun and the moon"],a:1,exp:"The two great pillars were named Boaz (meaning strength) and Jachin (meaning establishment). They stand at the entrance of every lodge as symbolic gateposts."},
+    {q:"What is the Masonic term for opening and closing ceremonies of a lodge meeting?",opts:["Calling on and calling off","Opening and closing the lodge","Raising and lowering","The Work"],a:0,exp:"Lodges are 'called on' to begin and 'called off' to end — including during meals or breaks. The formal ceremony of opening and closing the lodge is distinct from calling on/off."},
+    {q:"What is the significance of the Trestle Board in a lodge?",opts:["It is a plank used in initiation ceremonies","The board on which the Master draws plans for the Craft to work by","A register of members","A ballot box"],a:1,exp:"The Trestle Board is a metaphor for the plans and designs by which we live our lives — drawn by the Master for the Craft's instruction, representing moral and spiritual guidance."},
+    {q:"What degree does a Mason receive when he is 'raised'?",opts:["Entered Apprentice","Fellow Craft","Master Mason","32nd Degree"],a:2,exp:"Being 'raised' to the sublime degree of Master Mason is the third and highest degree of the Blue Lodge, involving the dramatic legend of Hiram Abiff."},
+    {q:"What is the role of the Worshipful Master in a lodge?",opts:["He is the lodge treasurer","He presides over the lodge and governs its work","He is the Grand Lodge representative","He leads the ritual music"],a:1,exp:"The Worshipful Master governs his lodge with full authority during his term. 'Worshipful' is an honorific title from English tradition meaning 'worthy of respect'."},
+    {q:"What does the Masonic apron symbolize?",opts:["Wealth and status","Labor and purity of life","The degrees a Mason has earned","Membership in the lodge"],a:1,exp:"The white lambskin apron is said to be more ancient than the Golden Fleece or Roman Eagle — a badge of innocence and the bond of friendship, symbolizing purity and labor."},
+    {q:"What is the name of the governing body of Freemasonry in a given region?",opts:["The Supreme Council","The Grand Lodge","The Chapter","The Commandery"],a:1,exp:"Each state or country has a Grand Lodge that serves as the governing body for all Blue Lodges under its jurisdiction. Grand Lodges are sovereign and independent of one another."}
+  ];
+
+  let triviaQ=[],triviaIdx=0,triviaScore=0,triviaCorrect=0,triviaAnswered=false;
+
+  function shuffle(arr){return arr.slice().sort(()=>Math.random()-0.5);}
+
+  window.startTrivia=function(){
+    triviaQ=shuffle(QUESTIONS).slice(0,10);
+    triviaIdx=0;triviaScore=0;triviaCorrect=0;
+    document.getElementById('trivia-view').classList.add('open');
+    document.getElementById('trivia-results').classList.remove('open');
+    showQuestion();
+  };
+
+  function showQuestion(){
+    const q=triviaQ[triviaIdx];
+    triviaAnswered=false;
+    document.getElementById('trivia-q-num').textContent='Question '+(triviaIdx+1)+' of '+triviaQ.length;
+    document.getElementById('trivia-question').textContent=q.q;
+    document.getElementById('trivia-score-display').textContent=triviaScore+' pts';
+    document.getElementById('trivia-progress-bar').style.width=((triviaIdx/triviaQ.length)*100)+'%';
+    document.getElementById('trivia-feedback').style.display='none';
+    document.getElementById('trivia-next-btn').style.display='none';
+
+    const opts=document.getElementById('trivia-options');
+    opts.innerHTML=q.opts.map((opt,i)=>`<button class="trivia-opt" onclick="answerTrivia(${i})">${opt}</button>`).join('');
   }
 
-  async function loadMyRsvps() {
-    if(!currentUser) return;
-    const { data } = await sb.from('rsvps').select('event_id').eq('user_id',currentUser.id);
-    myRsvpIds = new Set((data||[]).map(r=>r.event_id));
-    userEventCount = myRsvpIds.size;
+  window.answerTrivia=function(chosen){
+    if(triviaAnswered)return;
+    triviaAnswered=true;
+    const q=triviaQ[triviaIdx];
+    const correct=chosen===q.a;
+    const pts=correct?10:0;
+    triviaScore+=pts;
+    if(correct)triviaCorrect++;
+
+    const opts=document.querySelectorAll('.trivia-opt');
+    opts.forEach((btn,i)=>{
+      btn.disabled=true;
+      if(i===q.a)btn.classList.add('correct');
+      else if(i===chosen&&!correct)btn.classList.add('wrong');
+      else btn.classList.add('reveal');
+    });
+
+    const fb=document.getElementById('trivia-feedback');
+    fb.className='';
+    fb.classList.add(correct?'correct':'wrong');
+    fb.innerHTML=(correct?'<strong>Correct!</strong> ':'<strong>Not quite.</strong> ')+q.exp;
+    fb.style.display='block';
+
+    const nextBtn=document.getElementById('trivia-next-btn');
+    nextBtn.textContent=triviaIdx<triviaQ.length-1?'Next Question →':'See Results';
+    nextBtn.style.display='block';
+    document.getElementById('trivia-score-display').textContent=triviaScore+' pts';
+  };
+
+  window.nextQuestion=function(){
+    triviaIdx++;
+    if(triviaIdx>=triviaQ.length){showResults();return;}
+    showQuestion();
+  };
+
+  async function showResults(){
+    document.getElementById('trivia-progress-bar').style.width='100%';
+    const pct=Math.round((triviaCorrect/triviaQ.length)*100);
+    let symbol='🏅',title='Well played, Brother!';
+    if(pct===100){symbol='🔺';title='Perfect Round!';}
+    else if(pct>=80){symbol='⭐';title='Excellent work!';}
+    else if(pct>=60){symbol='👍';title='Well played!';}
+    else if(pct>=40){symbol='📖';title='Keep studying, Brother.';}
+    else{symbol='🕯️';title='The work continues...';}
+
+    document.getElementById('results-symbol').textContent=symbol;
+    document.getElementById('results-title').textContent=title;
+    document.getElementById('results-subtitle').textContent=triviaCorrect+' of '+triviaQ.length+' correct · '+pct+'%';
+    document.getElementById('results-score').textContent=triviaScore;
+    document.getElementById('results-pts').textContent='+'+triviaScore+' pts added to your profile';
+    document.getElementById('results-correct').textContent=triviaCorrect+' of '+triviaQ.length+' questions answered correctly';
+
+    document.getElementById('trivia-view').classList.remove('open');
+    document.getElementById('trivia-results').classList.add('open');
+
+    userPoints+=triviaScore;
+    userGameCount++;
+    if(pct===100)unlockTrophy('trophy-perfect');
+    if(userGameCount>=5)unlockTrophy('trophy-trivia');
+    updateProfileStats();
+
+    if(currentUser){
+      await sb.from('game_scores').insert({
+        user_id:currentUser.id,
+        game:'masonic_trivia',
+        score:triviaScore,
+        correct:triviaCorrect,
+        total:triviaQ.length
+      });
+      await loadTriviaLeaderboard();
+    }
+  }
+
+  window.restartTrivia=function(){
+    document.getElementById('trivia-results').classList.remove('open');
+    startTrivia();
+  };
+
+  window.closeTrivia=function(){
+    document.getElementById('trivia-view').classList.remove('open');
+    document.getElementById('trivia-results').classList.remove('open');
+  };
+
+  window.closeTriviaConfirm=function(){
+    if(triviaAnswered||triviaIdx===0){closeTrivia();return;}
+    if(confirm('Leave the game? Your progress will be lost.')){closeTrivia();}
+  };
+
+  /* ══ TRIVIA LEADERBOARD ══ */
+  async function loadTriviaLeaderboard(){
+    const{data}=await sb.from('game_scores').select('user_id,score').eq('game','masonic_trivia').order('score',{ascending:false}).limit(20);
+    if(!data||!data.length)return;
+
+    const byUser={};
+    data.forEach(r=>{if(!byUser[r.user_id]||r.score>byUser[r.user_id])byUser[r.user_id]=r.score;});
+    const sorted=Object.entries(byUser).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+    const ids=sorted.map(([id])=>id);
+    const{data:profiles}=await sb.from('profiles').select('id,full_name').in('id',ids);
+    const nameMap={};
+    (profiles||[]).forEach(p=>nameMap[p.id]=p.full_name||'Brother');
+
+    document.getElementById('trivia-lb-rows').innerHTML=sorted.map(([id,score],i)=>`
+      <div class="gs-row">
+        <div class="gs-rank">${i+1}</div>
+        <div class="gs-name">${nameMap[id]||'Brother'}</div>
+        <div class="gs-score">${score} pts</div>
+      </div>`).join('');
+  }
+
+  /* ══ CALENDAR ══ */
+  async function loadEvents(){
+    const{data,error}=await sb.from('events').select('*').order('starts_at',{ascending:true});
+    if(error){console.error(error);return;}
+    allEvents=data||[];
+    renderCalendar();renderEvents();
+  }
+
+  async function loadMyRsvps(){
+    if(!currentUser)return;
+    const{data}=await sb.from('rsvps').select('event_id').eq('user_id',currentUser.id);
+    myRsvpIds=new Set((data||[]).map(r=>r.event_id));
+    userEventCount=myRsvpIds.size;
     updateProfileStats();
   }
 
-  /* ── CALENDAR GRID ── */
-  function renderCalendar() {
+  function renderCalendar(){
     const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
     document.getElementById('cal-month-label').textContent=monthNames[calMonth]+' '+calYear;
-
     const firstDay=new Date(calYear,calMonth,1).getDay();
     const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
-
-    const eventDays=new Set(allEvents
-      .filter(e=>{ const d=new Date(e.starts_at); return d.getFullYear()===calYear&&d.getMonth()===calMonth; })
-      .map(e=>new Date(e.starts_at).getDate())
-    );
-
+    const eventDays=new Set(allEvents.filter(e=>{const d=new Date(e.starts_at);return d.getFullYear()===calYear&&d.getMonth()===calMonth;}).map(e=>new Date(e.starts_at).getDate()));
     const grid=document.getElementById('cal-days');
     grid.innerHTML='';
     for(let i=0;i<firstDay;i++){const el=document.createElement('div');el.className='cal-day empty';grid.appendChild(el);}
     for(let d=1;d<=daysInMonth;d++){
-      const el=document.createElement('div');
-      el.className='cal-day';
-      if(d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear()) el.classList.add('today');
-      if(eventDays.has(d)) el.classList.add('has-event');
-      el.textContent=d;
-      el.onclick=()=>filterEventsByDay(d);
+      const el=document.createElement('div');el.className='cal-day';
+      if(d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear())el.classList.add('today');
+      if(eventDays.has(d))el.classList.add('has-event');
+      el.textContent=d;el.onclick=()=>filterEventsByDay(d);
       grid.appendChild(el);
     }
   }
 
-  function filterEventsByDay(day) {
-    document.querySelectorAll('.cal-day').forEach(el=>el.classList.remove('selected'));
-    const dayEls=document.querySelectorAll('.cal-day:not(.empty)');
-    dayEls[day-1]&&dayEls[day-1].classList.add('selected');
-    const filtered=allEvents.filter(e=>{
-      const d=new Date(e.starts_at);
-      return d.getDate()===day&&d.getMonth()===calMonth&&d.getFullYear()===calYear;
-    });
+  function filterEventsByDay(day){
+    document.querySelectorAll('.cal-day:not(.empty)').forEach((el,i)=>{el.classList.remove('selected');if(i===day-1)el.classList.add('selected');});
+    const filtered=allEvents.filter(e=>{const d=new Date(e.starts_at);return d.getDate()===day&&d.getMonth()===calMonth&&d.getFullYear()===calYear;});
     const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
     document.getElementById('events-label').textContent=monthNames[calMonth]+' '+day;
     renderEvents(filtered);
@@ -660,93 +907,60 @@
     if(calMonth>11){calMonth=0;calYear++;}
     if(calMonth<0){calMonth=11;calYear--;}
     document.getElementById('events-label').textContent='Upcoming Events';
-    renderCalendar();
-    renderEvents();
+    renderCalendar();renderEvents();
   };
 
-  /* ── EVENT CARDS ── */
-  const typeMap={
-    meeting:{label:'📋 Stated Meeting',pill:'pill-meeting'},
-    degree:{label:'🎓 Degree Work',pill:'pill-degree'},
-    social:{label:'🎉 Social Event',pill:'pill-social'},
-    scottish:{label:'⭐ Scottish Rite',pill:'pill-scottish'},
-    shrine:{label:'🌙 Shrine Event',pill:'pill-shrine'},
-    general:{label:'📌 General',pill:'pill-general'}
-  };
+  const typeMap={meeting:{label:'📋 Stated Meeting',pill:'pill-meeting'},degree:{label:'🎓 Degree Work',pill:'pill-degree'},social:{label:'🎉 Social Event',pill:'pill-social'},scottish:{label:'⭐ Scottish Rite',pill:'pill-scottish'},shrine:{label:'🌙 Shrine Event',pill:'pill-shrine'},general:{label:'📌 General',pill:'pill-general'}};
 
-  function renderEvents(events) {
-    const list = events || allEvents.filter(e=>{
-      const d=new Date(e.starts_at);
-      return d.getFullYear()===calYear&&d.getMonth()===calMonth;
-    });
+  function renderEvents(events){
+    const list=events||allEvents.filter(e=>{const d=new Date(e.starts_at);return d.getFullYear()===calYear&&d.getMonth()===calMonth;});
     const container=document.getElementById('events-container');
-    if(!list.length){
-      container.innerHTML='<div class="event-empty"><div class="event-empty-icon">📅</div>No events this month.<br>Tap "+ Add Event" to post one.</div>';
-      return;
-    }
+    if(!list.length){container.innerHTML='<div class="event-empty"><div class="event-empty-icon">📅</div>No events this month.<br>Tap + to post one.</div>';return;}
     container.innerHTML=list.map(ev=>{
       const t=typeMap[ev.event_type]||typeMap.general;
       const dt=new Date(ev.starts_at);
       const dateStr=dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
       const timeStr=ev.starts_at.includes('T')?dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):'';
       const rsvpd=myRsvpIds.has(ev.id);
-      return `
-        <div class="event-card" id="ecard-${ev.id}">
-          <div><span class="event-type-pill ${t.pill}">${t.label}</span></div>
-          <div class="event-title">${escHtml(ev.title)}</div>
-          ${ev.description?`<div style="font-size:13px;color:var(--text-muted);margin-top:4px;line-height:1.5;">${escHtml(ev.description)}</div>`:''}
-          <div class="event-meta-row">📅 ${dateStr}${timeStr?' · 🕖 '+timeStr:''}</div>
-          ${ev.location?`<div class="event-meta-row">📍 ${escHtml(ev.location)}</div>`:''}
-          <div class="event-actions">
-            <button class="rsvp-btn ${rsvpd?'rsvpd':''}" id="rsvp-btn-${ev.id}" onclick="toggleRSVP('${ev.id}',${ev.points_value||10},this)">
-              ${rsvpd?'Attending ✓':'RSVP'}
-            </button>
-            <span class="event-pts">+${ev.points_value||10} pts for attending</span>
-          </div>
-        </div>`;
+      return`<div class="event-card">
+        <span class="event-type-pill ${t.pill}">${t.label}</span>
+        <div class="event-title">${escHtml(ev.title)}</div>
+        ${ev.description?`<div style="font-size:13px;color:var(--text-muted);margin-top:4px;line-height:1.5;">${escHtml(ev.description)}</div>`:''}
+        <div class="event-meta-row">📅 ${dateStr}${timeStr?' · 🕖 '+timeStr:''}</div>
+        ${ev.location?`<div class="event-meta-row">📍 ${escHtml(ev.location)}</div>`:''}
+        <div class="event-actions">
+          <button class="rsvp-btn ${rsvpd?'rsvpd':''}" id="rsvp-btn-${ev.id}" onclick="toggleRSVP('${ev.id}',${ev.points_value||10},this)">
+            ${rsvpd?'Attending ✓':'RSVP'}
+          </button>
+          <span class="event-pts">+${ev.points_value||10} pts</span>
+        </div>
+      </div>`;
     }).join('');
   }
 
-  /* ── RSVP ── */
-  window.toggleRSVP=async function(eventId, pts, btn) {
+  window.toggleRSVP=async function(eventId,pts,btn){
     if(!currentUser){showToast('Please sign in to RSVP.');return;}
-    const already=myRsvpIds.has(eventId);
-    btn.disabled=true;
-
+    const already=myRsvpIds.has(eventId);btn.disabled=true;
     if(already){
       await sb.from('rsvps').delete().eq('event_id',eventId).eq('user_id',currentUser.id);
-      myRsvpIds.delete(eventId);
-      userPoints=Math.max(0,userPoints-(pts||10));
-      userEventCount=Math.max(0,userEventCount-1);
-      btn.classList.remove('rsvpd');
-      btn.textContent='RSVP';
-      showToast('RSVP removed');
-    } else {
-      const {error}=await sb.from('rsvps').insert({event_id:eventId,user_id:currentUser.id});
+      myRsvpIds.delete(eventId);userPoints=Math.max(0,userPoints-(pts||10));userEventCount=Math.max(0,userEventCount-1);
+      btn.classList.remove('rsvpd');btn.textContent='RSVP';showToast('RSVP removed');
+    }else{
+      const{error}=await sb.from('rsvps').insert({event_id:eventId,user_id:currentUser.id});
       if(error){showToast('Could not RSVP.');btn.disabled=false;return;}
-      myRsvpIds.add(eventId);
-      userPoints+=(pts||10);
-      userEventCount++;
-      btn.classList.add('rsvpd');
-      btn.textContent='Attending ✓';
-      showToast('RSVP confirmed — +'+(pts||10)+' points!');
+      myRsvpIds.add(eventId);userPoints+=(pts||10);userEventCount++;
+      btn.classList.add('rsvpd');btn.textContent='Attending ✓';showToast('RSVP confirmed — +'+(pts||10)+' points!');
     }
-    btn.disabled=false;
-    updateProfileStats();
+    btn.disabled=false;updateProfileStats();
   };
 
-  /* ── ADD EVENT ── */
   window.openAddEvent=function(){
     const d=new Date();
     document.getElementById('ev-date').value=d.toISOString().split('T')[0];
     document.getElementById('ev-time').value='19:00';
-    document.getElementById('ev-title').value='';
-    document.getElementById('ev-location').value='';
-    document.getElementById('ev-desc').value='';
-    document.getElementById('ev-points').value='10';
+    document.getElementById('ev-title').value='';document.getElementById('ev-location').value='';document.getElementById('ev-desc').value='';document.getElementById('ev-points').value='10';
     document.getElementById('add-event-overlay').classList.add('open');
   };
-
   window.closeAddEvent=function(){document.getElementById('add-event-overlay').classList.remove('open');};
   window.closeAddEventOutside=function(e){if(e.target===document.getElementById('add-event-overlay'))closeAddEvent();};
 
@@ -759,33 +973,20 @@
     const desc=document.getElementById('ev-desc').value.trim();
     const pts=parseInt(document.getElementById('ev-points').value)||10;
     const btn=document.getElementById('ev-submit-btn');
-
     if(!title){showToast('Please enter an event title.');return;}
     if(!date){showToast('Please select a date.');return;}
-
-    btn.disabled=true; btn.textContent='Posting...';
-
+    btn.disabled=true;btn.textContent='Posting...';
     const starts_at=new Date(date+'T'+time).toISOString();
-    const {error}=await sb.from('events').insert({
-      title, event_type:type, starts_at,
-      location:location||null, description:desc||null,
-      points_value:pts, created_by:currentUser.id
-    });
-
-    btn.disabled=false; btn.textContent='Post Event';
-
-    if(error){showToast('Could not post event. Please try again.');console.error(error);return;}
-    showToast('Event posted!');
-    closeAddEvent();
-    await loadEvents();
+    const{error}=await sb.from('events').insert({title,event_type:type,starts_at,location:location||null,description:desc||null,points_value:pts,created_by:currentUser.id});
+    btn.disabled=false;btn.textContent='Post Event';
+    if(error){showToast('Could not post event.');console.error(error);return;}
+    showToast('Event posted!');closeAddEvent();await loadEvents();
   };
 
-  /* ══════════════════════════════
-     MESSAGING
-  ══════════════════════════════ */
-  async function loadConversations() {
-    if(!currentUser) return;
-    const {data,error}=await sb.from('messages').select('*').or(`sender_id.eq.${currentUser.id},recipient_id.eq.${currentUser.id}`).order('created_at',{ascending:false});
+  /* ══ MESSAGING ══ */
+  async function loadConversations(){
+    if(!currentUser)return;
+    const{data,error}=await sb.from('messages').select('*').or(`sender_id.eq.${currentUser.id},recipient_id.eq.${currentUser.id}`).order('created_at',{ascending:false});
     if(error){console.error(error);return;}
     conversations={};
     (data||[]).forEach(msg=>{
@@ -799,7 +1000,7 @@
 
   async function loadProfiles(ids){
     const allIds=[...new Set([...ids,currentUser.id])];
-    const {data}=await sb.from('profiles').select('*').in('id',allIds.length?allIds:['none']);
+    const{data}=await sb.from('profiles').select('*').in('id',allIds.length?allIds:['none']);
     allProfiles=data||[];
   }
 
@@ -812,13 +1013,10 @@
     const ids=Object.keys(conversations);
     if(!ids.length){el.innerHTML='<div class="msg-empty"><div class="msg-empty-icon">💬</div>No messages yet.<br>Tap ✏️ to start a conversation.</div>';return;}
     el.innerHTML=ids.map(otherId=>{
-      const conv=conversations[otherId];
-      const profile=getProfile(otherId);
-      const name=profile?.full_name||'Brother';
-      const initials=getInitials(name);
+      const conv=conversations[otherId],profile=getProfile(otherId);
+      const name=profile?.full_name||'Brother',initials=getInitials(name);
       const preview=conv.lastMsg.content.length>40?conv.lastMsg.content.slice(0,40)+'...':conv.lastMsg.content;
-      const isMine=conv.lastMsg.sender_id===currentUser.id;
-      const unread=conv.unread;
+      const isMine=conv.lastMsg.sender_id===currentUser.id,unread=conv.unread;
       return`<div class="msg-row" onclick="openChat('${otherId}','${name.replace(/'/g,"\\'")}','${initials}')">
         <div class="msg-avatar">${initials}</div>
         <div class="msg-info"><div class="msg-name">${name}</div><div class="msg-preview">${isMine?'You: ':''}${escHtml(preview)}</div></div>
@@ -836,15 +1034,14 @@
     document.getElementById('chat-avatar-initials').textContent=initials;
     document.getElementById('chat-messages').innerHTML='<div style="padding:32px;text-align:center;color:var(--text-muted);">Loading...</div>';
     document.getElementById('chat-view').classList.add('open');
-    await markMessagesRead(otherId);
-    await loadChatMessages(otherId);
+    await markMessagesRead(otherId);await loadChatMessages(otherId);
     document.getElementById('chat-input').focus();
   };
 
   window.closeChat=function(){document.getElementById('chat-view').classList.remove('open');currentChat=null;loadConversations();};
 
   async function loadChatMessages(otherId){
-    const {data,error}=await sb.from('messages').select('*').or(`and(sender_id.eq.${currentUser.id},recipient_id.eq.${otherId}),and(sender_id.eq.${otherId},recipient_id.eq.${currentUser.id})`).order('created_at',{ascending:true});
+    const{data,error}=await sb.from('messages').select('*').or(`and(sender_id.eq.${currentUser.id},recipient_id.eq.${otherId}),and(sender_id.eq.${otherId},recipient_id.eq.${currentUser.id})`).order('created_at',{ascending:true});
     if(error){console.error(error);return;}
     renderChatMessages(data||[]);
   }
@@ -854,23 +1051,18 @@
     if(!messages.length){el.innerHTML='<div class="msg-empty" style="margin-top:60px;"><div class="msg-empty-icon">🤝</div>Start the conversation,<br>Brother.</div>';return;}
     let html='',lastDate='';
     messages.forEach(msg=>{
-      const mine=msg.sender_id===currentUser.id;
-      const d=new Date(msg.created_at),dateStr=d.toDateString();
+      const mine=msg.sender_id===currentUser.id,d=new Date(msg.created_at),dateStr=d.toDateString();
       if(dateStr!==lastDate){lastDate=dateStr;const label=dateStr===new Date().toDateString()?'Today':d.toLocaleDateString('en-US',{month:'short',day:'numeric'});html+=`<div class="chat-date-divider">${label}</div>`;}
-      const timeStr=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-      html+=`<div class="chat-bubble-wrap ${mine?'mine':'theirs'}"><div><div class="chat-bubble">${escHtml(msg.content)}</div><div class="chat-time">${timeStr}</div></div></div>`;
+      html+=`<div class="chat-bubble-wrap ${mine?'mine':'theirs'}"><div><div class="chat-bubble">${escHtml(msg.content)}</div><div class="chat-time">${d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}</div></div></div>`;
     });
-    el.innerHTML=html;
-    el.scrollTop=el.scrollHeight;
+    el.innerHTML=html;el.scrollTop=el.scrollHeight;
   }
 
   window.sendMessage=async function(){
     if(!currentChat||!currentUser)return;
-    const input=document.getElementById('chat-input');
-    const content=input.value.trim();if(!content)return;
-    input.value='';autoResize(input);
-    document.getElementById('chat-send').disabled=true;
-    const {error}=await sb.from('messages').insert({sender_id:currentUser.id,recipient_id:currentChat.id,content});
+    const input=document.getElementById('chat-input'),content=input.value.trim();if(!content)return;
+    input.value='';autoResize(input);document.getElementById('chat-send').disabled=true;
+    const{error}=await sb.from('messages').insert({sender_id:currentUser.id,recipient_id:currentChat.id,content});
     document.getElementById('chat-send').disabled=false;
     if(error){showToast('Could not send.');return;}
     await loadChatMessages(currentChat.id);
@@ -896,41 +1088,36 @@
     document.getElementById('member-picker').classList.add('open');
     const list=document.getElementById('member-picker-list');
     list.innerHTML='<div class="member-pick-empty">Loading members...</div>';
-    const {data,error}=await sb.from('profiles').select('*').neq('id',currentUser.id);
-    if(error||!data||!data.length){list.innerHTML='<div class="member-pick-empty">No other members yet.<br>Invite a Brother to join!</div>';return;}
+    const{data,error}=await sb.from('profiles').select('*').neq('id',currentUser.id);
+    if(error||!data||!data.length){list.innerHTML='<div class="member-pick-empty">No other members yet.</div>';return;}
     allProfiles=[...(allProfiles.filter(p=>p.id===currentUser.id)),...data];
-    list.innerHTML=data.map(p=>{const name=p.full_name||'Brother';const initials=getInitials(name);return`<div class="member-pick-row" onclick="startNewChat('${p.id}','${name.replace(/'/g,"\\'")}','${initials}')"><div class="member-pick-avatar">${initials}</div><div class="member-pick-name">${name}</div></div>`;}).join('');
+    list.innerHTML=data.map(p=>{const name=p.full_name||'Brother',initials=getInitials(name);return`<div class="member-pick-row" onclick="startNewChat('${p.id}','${name.replace(/'/g,"\\'")}','${initials}')"><div class="member-pick-avatar">${initials}</div><div class="member-pick-name">${name}</div></div>`;}).join('');
   };
 
   window.closeMemberPicker=function(e){if(e.target===document.getElementById('member-picker'))document.getElementById('member-picker').classList.remove('open');};
   window.startNewChat=function(id,name,initials){document.getElementById('member-picker').classList.remove('open');openChat(id,name,initials);};
 
-  /* ── AUTH ── */
+  /* ══ AUTH ══ */
   window.signIn=async function(){
-    const email=document.getElementById('signin-email').value.trim();
-    const password=document.getElementById('signin-password').value;
-    const btn=document.getElementById('signin-btn');
-    const err=document.getElementById('signin-error');
+    const email=document.getElementById('signin-email').value.trim(),password=document.getElementById('signin-password').value;
+    const btn=document.getElementById('signin-btn'),err=document.getElementById('signin-error');
     if(!email||!password){err.textContent='Please fill in all fields.';return;}
     btn.disabled=true;btn.textContent='Signing in...';err.textContent='';
-    const {data,error}=await sb.auth.signInWithPassword({email,password});
+    const{data,error}=await sb.auth.signInWithPassword({email,password});
     if(error){err.textContent='Invalid email or password.';btn.disabled=false;btn.textContent='Enter the Lodge';}
     else{currentUser=data.user;await showApp();}
   };
 
   window.signUp=async function(){
-    const code=document.getElementById('signup-code').value.trim().toUpperCase();
-    const name=document.getElementById('signup-name').value.trim();
-    const email=document.getElementById('signup-email').value.trim();
-    const password=document.getElementById('signup-password').value;
-    const btn=document.getElementById('signup-btn');
-    const err=document.getElementById('signup-error');
+    const code=document.getElementById('signup-code').value.trim().toUpperCase(),name=document.getElementById('signup-name').value.trim();
+    const email=document.getElementById('signup-email').value.trim(),password=document.getElementById('signup-password').value;
+    const btn=document.getElementById('signup-btn'),err=document.getElementById('signup-error');
     err.textContent='';
     if(!code||!name||!email||!password){err.textContent='Please fill in all fields.';return;}
     if(!VALID_CODES.includes(code)){err.textContent='Invalid invite code.';return;}
     if(password.length<8){err.textContent='Password must be at least 8 characters.';return;}
     btn.disabled=true;btn.textContent='Creating account...';
-    const {data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name,invite_code:code}}});
+    const{data,error}=await sb.auth.signUp({email,password,options:{data:{full_name:name,invite_code:code}}});
     if(error){err.textContent=error.message;btn.disabled=false;btn.textContent='Request Admission';}
     else if(data.session){currentUser=data.user;await showApp();showToast('Welcome, Brother '+name.split(' ').pop()+'!');}
     else{err.style.color='#81C784';err.textContent='Check your email to confirm, then sign in.';btn.textContent='Email sent!';}
@@ -938,20 +1125,17 @@
 
   window.signOut=async function(){
     if(realtimeSub)sb.removeChannel(realtimeSub);
-    await sb.auth.signOut();
-    currentUser=null;currentChat=null;
-    showAuth();
+    await sb.auth.signOut();currentUser=null;currentChat=null;showAuth();
   };
 
   window.switchAuthTab=function(tab){
     document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='signin')||(i===1&&tab==='signup')));
     document.getElementById('signin-form').style.display=tab==='signin'?'block':'none';
     document.getElementById('signup-form').style.display=tab==='signup'?'block':'none';
-    document.getElementById('signin-error').textContent='';
-    document.getElementById('signup-error').textContent='';
+    document.getElementById('signin-error').textContent='';document.getElementById('signup-error').textContent='';
   };
 
-  /* ── NAVIGATION ── */
+  /* ══ NAVIGATION ══ */
   const sections=['profile','messages','calendar','games','leaderboard'];
   window.navigateTo=function(id){
     if(!sections.includes(id)){showToast('Coming soon!');return;}
@@ -965,15 +1149,13 @@
   window.toggleDrawer=function(){document.getElementById('drawer').classList.toggle('open');document.getElementById('drawer-overlay').classList.toggle('open');};
   window.closeDrawer=function(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawer-overlay').classList.remove('open');};
   window.switchLbTab=function(btn,tab){document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.getElementById('lb-members').style.display=tab==='members'?'block':'none';document.getElementById('lb-lodges').style.display=tab==='lodges'?'block':'none';};
-
   function updateLbMonth(){const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];document.getElementById('lb-month-label').textContent=monthNames[today.getMonth()]+' '+today.getFullYear();}
-
   function escHtml(str){if(!str)return'';return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
   let toastTimer;
   window.showToast=function(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400);};
 
-  sb.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_IN'&&session){currentUser=session.user;}else if(event==='SIGNED_OUT'){currentUser=null;}});
+  sb.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_IN'&&session)currentUser=session.user;else if(event==='SIGNED_OUT')currentUser=null;});
 
   boot();
 })();
